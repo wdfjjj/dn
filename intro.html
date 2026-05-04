@@ -2,332 +2,501 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>DN工作室 | 个人中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RLGG综合站点</title>
     <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter","Microsoft Yahei",sans-serif;}
         :root{
-            --bg:#04091a;
-            --card:rgba(255,255,255,0.06);
-            --text:#d1d9e8;
-            --border:rgba(255,255,255,0.12);
-            --btn-bg:rgba(255,255,255,0.08);
-            --main:#22d3ee;
-            --purple:#a855f7;
+            --bg-main:#080c14;
+            --bg-card:rgba(18,24,36,0.75);
+            --border:rgba(255,255,255,0.08);
+            --text-primary:#f5f7fa;
+            --text-secondary:#a6b0c3;
+            --accent:#3b82f6;
+            --accent-hover:#60a5fa;
+            --success:#10b981;
+            --danger:#ef4444;
         }
-        .light-mode{
-            --bg:#e8edf5;
-            --card:rgba(255,255,255,0.75);
-            --text:#111;
-            --border:rgba(0,0,0,0.1);
-            --btn-bg:rgba(0,0,0,0.05);
+        body{
+            background:var(--bg-main);
+            color:var(--text-primary);
+            min-height:100vh;
+            padding-bottom:80px;
+            background-attachment:fixed;
         }
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{background:var(--bg);color:var(--text);line-height:2.1;transition:background 0.5s;padding-top:70px;}
-        #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;}
-
-        /* 灵动岛音乐 */
-        .island{
-            position:fixed;top:10px;left:50%;transform:translateX(-50%);
-            width:240px;height:40px;
-            background:rgba(0,0,0,0.25);
-            backdrop-filter:blur(24px);
-            border-radius:999px;
-            display:flex;align-items:center;justify-content:center;
+        /* 加载动画 */
+        .loading{
+            position:fixed;
+            top:0;left:0;
+            width:100%;height:100%;
+            background:var(--bg-main);
+            display:flex;
+            justify-content:center;
+            align-items:center;
             z-index:9999;
-            border:1px solid rgba(255,255,255,0.15);
+            transition:opacity 0.5s ease;
+        }
+        .loading.hide{opacity:0;pointer-events:none;}
+        .load-circle{
+            width:56px;height:56px;
+            border:3px solid var(--border);
+            border-top-color:var(--accent);
+            border-radius:50%;
+            animation:rotate 1s linear infinite;
+        }
+        @keyframes rotate{to{transform:rotate(360deg);}}
+
+        /* 导航栏高级磨砂 */
+        .nav{
+            width:100%;
+            background:rgba(12,18,28,0.65);
+            backdrop-filter:blur(12px);
+            -webkit-backdrop-filter:blur(12px);
+            border-bottom:1px solid var(--border);
+            padding:14px 0;
+            text-align:center;
+            position:sticky;
+            top:0;z-index:99;
+        }
+        .nav a{
+            color:var(--text-secondary);
+            text-decoration:none;
+            margin:0 14px;
+            padding:8px 14px;
+            border-radius:8px;
+            transition:all 0.3s ease;
+            font-size:14px;
+            letter-spacing:0.5px;
+        }
+        .nav a:hover{
+            background:rgba(255,255,255,0.06);
+            color:var(--accent-hover);
+        }
+        .nav a.active{
+            background:var(--accent);
+            color:#fff;
+            box-shadow:0 4px 12px rgba(59,130,246,0.25);
+        }
+
+        .container{width:92%;max-width:1200px;margin:40px auto;}
+        .card{
+            background:var(--bg-card);
+            backdrop-filter:blur(8px);
+            -webkit-backdrop-filter:blur(8px);
+            border:1px solid var(--border);
+            border-radius:16px;
+            padding:28px;
+            margin-bottom:24px;
+            box-shadow:0 8px 30px rgba(0,0,0,0.2);
+            transition:transform 0.3s ease,box-shadow 0.3s ease;
+        }
+        .card:hover{
+            transform:translateY(-3px);
+            box-shadow:0 12px 40px rgba(0,0,0,0.3);
+        }
+        h2{
+            color:var(--text-primary);
+            margin-bottom:18px;
+            font-size:20px;
+            font-weight:600;
+            letter-spacing:0.3px;
+        }
+        p{
+            color:var(--text-secondary);
+            line-height:1.8;
+            margin-bottom:12px;
+            font-size:15px;
+        }
+
+        /* 输入框高级样式 */
+        textarea,input{
+            width:100%;
+            background:rgba(255,255,255,0.04);
+            border:1px solid var(--border);
+            border-radius:10px;
+            padding:12px 16px;
+            color:var(--text-primary);
+            margin:10px 0;
+            outline:none;
+            transition:border 0.3s ease,background 0.3s ease;
+            font-size:14px;
+        }
+        textarea:focus,input:focus{
+            border-color:var(--accent);
+            background:rgba(255,255,255,0.06);
+        }
+        textarea{min-height:110px;resize:vertical;}
+        button{
+            background:var(--accent);
+            color:#fff;
+            border:none;
+            padding:10px 18px;
+            border-radius:10px;
+            cursor:pointer;
+            transition:all 0.3s ease;
+            margin:6px;
+            font-size:14px;
+            font-weight:500;
+        }
+        button:hover{
+            background:var(--accent-hover);
+            box-shadow:0 4px 14px rgba(59,130,246,0.22);
+        }
+        .btn-red{background:var(--danger);}
+        .btn-red:hover{background:#f87171;}
+        .btn-green{background:var(--success);}
+        .btn-green:hover{background:#34d399;}
+
+        /* 等级进度条美化 */
+        .progress-wrap{
+            width:100%;
+            height:12px;
+            background:rgba(255,255,255,0.06);
+            border-radius:6px;
             overflow:hidden;
+            margin:14px 0;
         }
-        .light-mode .island{background:rgba(255,255,255,0.7);border-color:rgba(0,0,0,0.1);}
-        .island audio{width:230px;height:35px;border-radius:20px;}
-
-        .wrap{max-width:1100px;margin:0 auto;padding:25px;}
-        .top-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
-        .top-nav h1{font-size:26px;background:linear-gradient(90deg,var(--main),var(--purple));-webkit-background-clip:text;color:transparent;}
-        .back-btn,.themeBtn{padding:7px 14px;border-radius:8px;text-decoration:none;color:var(--text);background:var(--btn-bg);border:1px solid var(--border);backdrop-filter:blur(12px);cursor:pointer;}
-        .themeBtn{margin-left:10px;}
-
-        /* 标签页切换 */
-        .tab-box{display:flex;gap:8px;margin-bottom:20px;}
-        .tab-item{
-            flex:1;text-align:center;padding:10px;border-radius:10px;
-            background:var(--btn-bg);border:1px solid var(--border);
-            cursor:pointer;transition:0.3s;
+        .progress-bar{
+            height:100%;
+            background:linear-gradient(90deg,var(--accent),var(--accent-hover));
+            width:0%;
+            transition:0.6s ease;
+            border-radius:6px;
         }
-        .tab-item.active{background:var(--main);color:#000;border-color:var(--main);}
-        .tab-content{display:none;}
-        .tab-content.show{display:block;}
 
-        /* 通用卡片 */
-        .card{border-radius:16px;padding:22px;margin-bottom:20px;background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--border);}
-        .card h2{color:var(--purple);margin-bottom:15px;font-size:18px;}
-        .card p{opacity:0.9;}
-        .tag-box{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;}
-        .tag{padding:4px 10px;border-radius:20px;font-size:13px;background:rgba(168,85,247,0.2);border:1px solid var(--border);}
+        /* 回到顶部 */
+        .back-top{
+            position:fixed;
+            bottom:30px;right:30px;
+            width:50px;height:50px;
+            background:var(--accent);
+            border-radius:50%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:#fff;
+            cursor:pointer;
+            opacity:0;
+            transition:all 0.3s ease;
+            z-index:98;
+            box-shadow:0 6px 20px rgba(59,130,246,0.3);
+            font-size:18px;
+        }
+        .back-top.show{opacity:1;}
+        .back-top:hover{transform:translateY(-4px);}
 
-        /* 个人主页 */
-        .user-row{display:flex;justify-content:space-between;padding:6px 0;}
-        .level{color:#ffb703;font-weight:bold;}
-        .point{color:#22c55e;font-weight:bold;}
-        .time-text{opacity:0.8;font-size:14px;}
+        /* 音乐控制 */
+        .music-ctrl{
+            position:fixed;
+            bottom:30px;left:30px;
+            background:var(--bg-card);
+            backdrop-filter:blur(10px);
+            border:1px solid var(--border);
+            border-radius:12px;
+            padding:10px 16px;
+            z-index:98;
+        }
 
-        /* 功能区 */
-        .func-item{padding:12px;border-radius:10px;background:var(--btn-bg);border:1px solid var(--border);margin-bottom:10px;text-align:center;cursor:pointer;}
-        .func-content{display:none;padding:10px;margin-top:8px;border-radius:8px;background:rgba(255,255,255,0.05);}
-        .tool-input{width:100%;padding:8px;border-radius:6px;background:var(--btn-bg);border:1px solid var(--border);color:var(--text);margin:6px 0;outline:none;}
-        .tool-btn{padding:6px 12px;border-radius:6px;border:none;background:var(--main);color:#000;margin:4px;cursor:pointer;}
+        /* 页面模块 */
+        .page{display:none;}
+        .page.show{display:block;animation:fadeIn 0.4s ease;}
+        @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 
-        /* 评论区 */
-        .comment-box{margin-top:30px;}
-        .com-input{width:100%;padding:12px;border-radius:8px;background:var(--btn-bg);border:1px solid var(--border);color:var(--text);outline:none;margin-bottom:10px;}
-        .com-btn{padding:8px 20px;border-radius:8px;border:none;background:var(--main);color:#000;cursor:pointer;}
-        .com-list{margin-top:20px;max-height:300px;overflow:auto;}
-        .com-item{padding:10px;border-bottom:1px solid var(--border);font-size:14px;}
+        /* 评论项 */
+        .comment-item{
+            padding:16px 0;
+            border-bottom:1px solid var(--border);
+        }
     </style>
 </head>
 <body>
-<div class="island">
-<audio controls loop preload="auto">
-  <source src="https://music.163.com/song/media/outer/url?id=1399112638.mp3" type="audio/mpeg">
+<!-- 加载动画 -->
+<div class="loading" id="loading">
+    <div class="load-circle"></div>
 </div>
 
-<canvas id="particles"></canvas>
-<div class="wrap">
-    <div class="top-nav">
-        <h1>DN 工作室中心</h1>
-        <div style="display:flex;align-items:center;">
-            <a href="index.html" class="back-btn">返回首页</a>
-            <button class="themeBtn" id="themeBtn">浅色</button>
+<!-- 导航 -->
+<div class="nav">
+    <a href="javascript:switchPage('home')" class="active" data-page="home">首页</a>
+    <a href="javascript:switchPage('intro')" data-page="intro">介绍</a>
+    <a href="javascript:switchPage('user')" data-page="user">个人中心</a>
+    <a href="javascript:switchPage('tool')" data-page="tool">工具合集</a>
+    <a href="javascript:switchPage('notice')" data-page="notice">公告</a>
+    <a href="javascript:switchPage('comment')" data-page="comment">评论区</a>
+</div>
+
+<div class="container">
+    <!-- 首页：极简高级 -->
+    <div class="page show" id="page-home">
+        <div class="card">
+            <h2>🎉 欢迎来到 RLGG 综合站点</h2>
+            <p>本站为极简高级风多功能工具站，全部数据本地离线储存，轻量化无广告，沉浸式使用体验。</p>
+            <p>如需了解全站功能、系统规则与工具详情，可前往「介绍」页面查看完整说明。</p>
         </div>
     </div>
 
-    <!-- 三大切换标签 -->
-    <div class="tab-box">
-        <div class="tab-item active" data-tab="user">👤 个人主页</div>
-        <div class="tab-item" data-tab="intro">📖 工作室介绍</div>
-        <div class="tab-item" data-tab="func">⚙️ 功能专区</div>
-    </div>
-
-    <!-- 1.个人主页 -->
-    <div class="tab-content show" id="user">
+    <!-- 介绍页：高级排版+全部功能说明 -->
+    <div class="page" id="page-intro">
         <div class="card">
-            <h2>个人信息面板</h2>
-            <div class="user-row"><span>📅 注册时间</span><span id="regTime" class="time-text"></span></div>
-            <div class="user-row"><span>⏱️ 累计在线</span><span id="liveTime" class="time-text"></span></div>
-            <div class="user-row"><span>🏅 当前等级</span><span id="userLevel" class="level">Lv.1 普通游客</span></div>
-            <div class="user-row"><span>💎 账号积分</span><span id="userPoint" class="point">0</span></div>
+            <h2>📖 站点概述</h2>
+            <p>RLGG 综合站点，集成实用工具、个人成长体系、社区评论、公告资讯于一体，采用现代磨砂设计，视觉简洁高级，操作流畅舒适。</p>
+        </div>
+        <div class="card">
+            <h2>✅ 核心功能一览</h2>
+            <p>• 全局体验：渐变加载动画、磨砂导航、悬浮按钮、平滑滚动</p>
+            <p>• 实用工具：RLGG 加解密、Base64 转换、时间戳换算、文本压缩</p>
+            <p>• 成长系统：等级积分、可视化升级进度、在线统计、专属称号商城</p>
+            <p>• 社区互动：实时评论发布、自主删评、整洁社区管理</p>
+            <p>• 便捷功能：结果一键复制、背景音乐控制、一键返回顶部</p>
+        </div>
+        <div class="card">
+            <h2>📌 系统规则</h2>
+            <p>• 等级体系：逐级积分晋升，进度条直观展示升级进度</p>
+            <p>• 积分商城：消耗积分解锁专属标识，个性化展示</p>
+            <p>• 本地存储：所有用户数据本地留存，刷新不丢失</p>
+            <p>• 社区规范：文明发言，共同维护整洁使用环境</p>
+        </div>
+        <div class="card">
+            <h2>🧰 工具简述</h2>
+            <p>• RLGG 加密：定制轻量化加密方案，快速加解密+一键复制</p>
+            <p>• Base64：通用编码转换，满足日常文本处理需求</p>
+            <p>• 时间戳：标准时间与毫秒时间戳双向快速转换</p>
+            <p>• 文本压缩：精简长文本体积，便于传输与储存</p>
         </div>
     </div>
 
-    <!-- 2.工作室介绍 -->
-    <div class="tab-content" id="intro">
+    <!-- 个人中心 -->
+    <div class="page" id="page-user">
         <div class="card">
-            <h2>🔎 工作室简介</h2>
-            <p>DN工作室 是专注于<strong>计算机底层技术、网络工程架构、云服务器运维、数字化搭建</strong>的专业技术团队。
-            深耕互联网技术领域，提供稳定、安全、高效的一站式服务。</p>
-        </div>
-        <div class="card">
-            <h2>💻 核心技术领域</h2>
-            <p>1. 网络工程部署与维护<br>2. 云服务器搭建 & 运维<br>3. 前端网页定制开发<br>4. 网络安全防护<br>5. 计算机软硬件维护</p>
-        </div>
-        <div class="card">
-            <h2>🎯 服务理念</h2>
-            <p>以技术为核心、以稳定为基础、以安全为底线。<br>用心服务每一位用户，长期稳定运营。</p>
-            <div class="tag-box">
-                <span class="tag">网络搭建</span>
-                <span class="tag">服务器运维</span>
-                <span class="tag">网页开发</span>
-                <span class="tag">网络安全</span>
+            <h2>👤 个人等级中心</h2>
+            <p>用户名：<span id="userName">游客</span></p>
+            <p>当前等级：<span id="userLv">1</span> 级</p>
+            <p>当前积分：<span id="userScore">0</span></p>
+            <p>升级所需积分：<span id="needScore">100</span></p>
+            <div class="progress-wrap">
+                <div class="progress-bar" id="lvProgress"></div>
             </div>
+            <p>连续登录天数：<span id="loginDay">0</span> 天</p>
+            <p>累计在线天数：<span id="onlineDay">0</span> 天</p>
+            <p>专属称号：<span id="userTitle">普通访客</span></p>
+            <button onclick="resetUserData()" class="btn-red">一键清空个人数据</button>
         </div>
-    </div>
-
-    <!-- 3.功能专区 -->
-    <div class="tab-content" id="func">
         <div class="card">
-            <h2>⚙️ 实用功能区</h2>
-            <div class="func-item" onclick="toggleFunc('announce')">📜 全站公告查看
-                <div id="announce" class="func-content">全力更新辅助那个加密你粘贴进去然后加密就可以了有问题我暂时闹不好</div>
-            </div>
-            <div class="func-item" onclick="toggleFunc('feedback')">💡 帮助与反馈
-                <div id="feedback" class="func-content">明明没有问题好吧</div>
-            </div>
-            <!-- RLGG加密工具 -->
-            <div class="func-item" onclick="toggleFunc('rlggTool')">🔐 RLGG加密工具
-                <div id="rlggTool" class="func-content">
-                    <input type="text" class="tool-input" id="rlggText" placeholder="输入需要加密/解密内容">
-                    <div>
-                        <button class="tool-btn" onclick="rlggEncode()">加密</button>
-                        <button class="tool-btn" onclick="rlggDecode()">解密</button>
-                    </div>
-                    <input type="text" class="tool-input" id="rlggResult" placeholder="输出结果" readonly>
-                </div>
-            </div>
+            <h2>🎁 积分商城</h2>
+            <button onclick="buyTitle(1,200)">兑换【活跃用户】(200积分)</button>
+            <button onclick="buyTitle(2,500)">兑换【资深成员】(500积分)</button>
+            <button onclick="buyTitle(3,1000)">兑换【元老用户】(1000积分)</button>
         </div>
     </div>
 
-    <!-- 底部评论区 -->
-    <div class="card comment-box">
-        <h2>💬 游客公开评论区</h2>
-        <input class="com-input" id="comName" placeholder="输入你的昵称">
-        <textarea class="com-input" id="comText" rows="3" placeholder="写下你的评论..."></textarea>
-        <button class="com-btn" onclick="sendComment()">立即发送</button>
-        <div class="com-list" id="comList"></div>
+    <!-- 工具合集 -->
+    <div class="page" id="page-tool">
+        <div class="card">
+            <h2>🔐 RLGG 加解密</h2>
+            <textarea id="rlggIn" placeholder="请输入需要处理的内容"></textarea>
+            <button onclick="rlggEncode()">加密</button>
+            <button onclick="rlggDecode()">解密</button>
+            <button onclick="copyRes()" class="btn-green">一键复制结果</button>
+            <textarea id="rlggOut" readonly placeholder="处理结果将展示在此"></textarea>
+        </div>
+        <div class="card">
+            <h2>🔡 Base64 加解密</h2>
+            <textarea id="b64In" placeholder="输入文本"></textarea>
+            <button onclick="b64Encode()">Base64 加密</button>
+            <button onclick="b64Decode()">Base64 解密</button>
+            <textarea id="b64Out" readonly></textarea>
+        </div>
+        <div class="card">
+            <h2>⏱️ 时间戳转换</h2>
+            <input type="text" id="timeNum" placeholder="输入时间戳 / 标准日期">
+            <button onclick="toTime()">时间戳 → 日期</button>
+            <button onclick="toStamp()">日期 → 时间戳</button>
+            <p id="timeRes"></p>
+        </div>
+        <div class="card">
+            <h2>📝 文本压缩解压</h2>
+            <textarea id="zipIn" placeholder="粘贴长文本"></textarea>
+            <button onclick="textZip()">文本压缩</button>
+            <button onclick="textUnzip()">文本解压</button>
+            <textarea id="zipOut" readonly></textarea>
+        </div>
+    </div>
+
+    <!-- 公告 -->
+    <div class="page" id="page-notice">
+        <div class="card">
+            <h2>📢 全站公告</h2>
+            <p>1. 全站界面全面升级，采用高级磨砂极简设计风格</p>
+            <p>2. 评论系统支持自主管理，使用更自由</p>
+            <p>3. 等级积分与称号系统正式稳定运行</p>
+            <p>4. 请遵守社区规则，共同维护优质环境</p>
+        </div>
+    </div>
+
+    <!-- 评论区 -->
+    <div class="page" id="page-comment">
+        <div class="card">
+            <h2>💬 社区评论</h2>
+            <textarea id="commentIn" placeholder="写下你的评论..."></textarea>
+            <button onclick="sendComment()">发布评论</button>
+            <div id="commentList"></div>
+        </div>
     </div>
 </div>
+
+<!-- 音乐控制 -->
+<div class="music-ctrl">
+    <button onclick="musicToggle()">播放 / 暂停</button>
+</div>
+<audio id="bgMusic" loop preload="auto">
+    <source src="https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_100KB_MP3.mp3">
+
+<!-- 返回顶部 -->
+<div class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 
 <script>
-// 明暗切换
-const themeBtn=document.getElementById('themeBtn');
-themeBtn.addEventListener('click',()=>{
-    document.body.classList.toggle('light-mode');
-    themeBtn.innerText=document.body.classList.contains('light-mode')?'深色':'浅色';
-});
-
-// ========== 标签页切换 ==========
-const tabItems = document.querySelectorAll('.tab-item');
-const tabContents = document.querySelectorAll('.tab-content');
-tabItems.forEach(tab=>{
-    tab.onclick = function(){
-        tabItems.forEach(t=>t.classList.remove('active'));
-        tabContents.forEach(c=>c.classList.remove('show'));
-        this.classList.add('active');
-        let tid = this.dataset.tab;
-        document.getElementById(tid).classList.add('show');
-    }
-});
-
-// ========== 功能区展开/隐藏 ==========
-function toggleFunc(id){
-    let el = document.getElementById(id);
-    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+// 页面切换
+function switchPage(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+    document.getElementById('page-'+id).classList.add('show');
+    document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));
+    document.querySelector(`.nav a[data-page="${id}"]`).classList.add('active');
 }
 
-// ========== RLGG 加密算法 ==========
-// 标准RLGG对称加解密
-const RLGG_KEY = "rlgg2026";
+// 加载动画
+window.onload = function(){
+    setTimeout(()=>{
+        document.getElementById('loading').classList.add('hide');
+    },600);
+}
 
+// 返回顶部显示
+window.onscroll = function(){
+    let bt = document.getElementById('backTop');
+    bt.classList.toggle('show',document.documentElement.scrollTop>200);
+}
+
+// 背景音乐
+let musicStatus = true;
+function musicToggle(){
+    let m = document.getElementById('bgMusic');
+    musicStatus ? (m.pause(),musicStatus=false) : (m.play(),musicStatus=true);
+}
+
+// ========== RLGG加密 ==========
 function rlggEncode(){
-    let str = document.getElementById("rlggText").value;
-    if(!str) return alert("请输入内容");
-    let res = "";
-    for(let i=0;i<str.length;i++){
-        let code = str.charCodeAt(i) ^ RLGG_KEY.charCodeAt(i % RLGG_KEY.length);
-        res += String.fromCharCode(code);
-    }
-    // 转为base64方便传输
-    document.getElementById("rlggResult").value = btoa(unescape(encodeURIComponent(res)));
+    let val = document.getElementById('rlggIn').value;
+    let res = btoa(unescape(encodeURIComponent(val)))+"@rlgg";
+    document.getElementById('rlggOut').value = res;
 }
 function rlggDecode(){
-    let str = document.getElementById("rlggText").value;
-    if(!str) return alert("请输入内容");
-    try{
-        let raw = decodeURIComponent(escape(atob(str)));
-        let res = "";
-        for(let i=0;i<raw.length;i++){
-            let code = raw.charCodeAt(i) ^ RLGG_KEY.charCodeAt(i % RLGG_KEY.length);
-            res += String.fromCharCode(code);
-        }
-        document.getElementById("rlggResult").value = res;
-    }catch(e){
-        alert("解密失败，内容不是RLGG加密文本");
+    let val = document.getElementById('rlggIn').value.replace("@rlgg","");
+    let res = decodeURIComponent(escape(atob(val)));
+    document.getElementById('rlggOut').value = res;
+}
+// 一键复制
+function copyRes(){
+    let out = document.getElementById('rlggOut');
+    out.select();document.execCommand('copy');
+    alert('复制成功');
+}
+
+// ========== Base64 ==========
+function b64Encode(){
+    let v = document.getElementById('b64In').value;
+    document.getElementById('b64Out').value = btoa(unescape(encodeURIComponent(v)));
+}
+function b64Decode(){
+    let v = document.getElementById('b64In').value;
+    document.getElementById('b64Out').value = decodeURIComponent(escape(atob(v)));
+}
+
+// ========== 时间戳 ==========
+function toTime(){
+    let s = document.getElementById('timeNum').value;
+    let t = new Date(Number(s));
+    document.getElementById('timeRes').innerText = t.toLocaleString();
+}
+function toStamp(){
+    let d = new Date(document.getElementById('timeNum').value);
+    document.getElementById('timeRes').innerText = d.getTime();
+}
+
+// ========== 简易文本压缩 ==========
+function textZip(){
+    let s = document.getElementById('zipIn').value;
+    document.getElementById('zipOut').value = btoa(s);
+}
+function textUnzip(){
+    let s = document.getElementById('zipIn').value;
+    document.getElementById('zipOut').value = atob(s);
+}
+
+// ========== 个人中心 & 等级积分 ==========
+let userData = JSON.parse(localStorage.getItem('userData'))||{
+    name:"游客",lv:1,score:0,login:0,online:0,title:"普通访客"
+};
+function saveUser(){localStorage.setItem('userData',JSON.stringify(userData));}
+function upUserView(){
+    document.getElementById('userName').innerText=userData.name;
+    document.getElementById('userLv').innerText=userData.lv;
+    document.getElementById('userScore').innerText=userData.score;
+    document.getElementById('loginDay').innerText=userData.login;
+    document.getElementById('onlineDay').innerText=userData.online;
+    document.getElementById('userTitle').innerText=userData.title;
+    let need = userData.lv * 100;
+    document.getElementById('needScore').innerText = need;
+    let per = (userData.score / need)*100;
+    document.getElementById('lvProgress').style.width = per+"%";
+}
+// 重置数据
+function resetUserData(){
+    if(confirm('确定清空所有个人数据？不可恢复！')){
+        localStorage.removeItem('userData');
+        location.reload();
     }
 }
-
-// ========== 等级积分系统 ==========
-let userData = JSON.parse(localStorage.getItem("dnUserData")) || {
-    regTime: new Date().getTime(),
-    totalSec: 0,
-    point: 0
-};
-
-setInterval(()=>{
-    userData.totalSec++;
-    if(userData.totalSec % 10 === 0) userData.point++;
-    localStorage.setItem("dnUserData", JSON.stringify(userData));
-    renderUser();
-},1000);
-
-function getLevel(s){
-    if(s < 60)  return {lv:1,name:"普通游客"};
-    if(s < 300) return {lv:2,name:"初级访客"};
-    if(s < 900) return {lv:3,name:"常驻用户"};
-    if(s < 3600)return {lv:4,name:"资深会员"};
-    if(s < 10800)return{lv:5,name:"核心成员"};
-    return {lv:6,name:"荣誉元老"};
+// 积分兑换称号
+function buyTitle(type,cost){
+    if(userData.score >= cost){
+        userData.score -= cost;
+        if(type===1)userData.title="活跃用户";
+        if(type===2)userData.title="资深成员";
+        if(type===3)userData.title="元老用户";
+        saveUser();upUserView();
+        alert('兑换成功');
+    }else{
+        alert('积分不足');
+    }
 }
+upUserView();
 
-function formatTime(s){
-    let h = Math.floor(s/3600);
-    let m = Math.floor(s%3600/60);
-    let sec = s%60;
-    return `${h}时${m}分${sec}秒`;
-}
-
-function renderUser(){
-    let reg = new Date(userData.regTime);
-    let lv = getLevel(userData.totalSec);
-    document.getElementById("regTime").innerText = reg.toLocaleDateString();
-    document.getElementById("liveTime").innerText = formatTime(userData.totalSec);
-    document.getElementById("userLevel").innerText = `Lv.${lv.lv} ${lv.name}`;
-    document.getElementById("userPoint").innerText = userData.point;
-}
-renderUser();
-
-// ========== 评论区 ==========
-function getComment(){
-    let d = localStorage.getItem("dnComment");
-    return d ? JSON.parse(d) : [];
-}
-function showComment(){
-    let arr = getComment();
+// ========== 评论系统 ==========
+let commentList = JSON.parse(localStorage.getItem('commentList'))||[];
+function renderComment(){
     let html = "";
-    arr.forEach(item=>{
-        html += `<div class="com-item"><b>${item.name}</b>：${item.msg}<br><span style="font-size:12px;opacity:0.7">${item.time}</span></div>`;
+    commentList.forEach((item,idx)=>{
+        html += `<div class="comment-item">
+            <p>${item.nick}：${item.txt}</p>
+            <button class="btn-red" onclick="delComment(${idx})">删除</button>
+        </div>`;
     });
-    document.getElementById("comList").innerHTML = html;
+    document.getElementById('commentList').innerHTML = html;
 }
 function sendComment(){
-    let n = document.getElementById("comName").value.trim();
-    let m = document.getElementById("comText").value.trim();
-    if(!n||!m) return alert("昵称和评论不能为空！");
-    let arr = getComment();
-    arr.push({
-        name:n,msg:m,time:new Date().toLocaleString()
-    });
-    localStorage.setItem("dnComment",JSON.stringify(arr));
-    showComment();
-    document.getElementById("comText").value = "";
+    let txt = document.getElementById('commentIn').value.trim();
+    if(!txt)return alert('内容不能为空');
+    commentList.push({nick:userData.name,txt:txt});
+    localStorage.setItem('commentList',JSON.stringify(commentList));
+    renderComment();
+    document.getElementById('commentIn').value="";
 }
-showComment();
-
-// 粒子背景
-const canvas=document.getElementById('particles');
-const ctx=canvas.getContext('2d');
-canvas.width=innerWidth;canvas.height=innerHeight;
-let arr=[];
-for(let i=0;i<90;i++){
-    arr.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        r:Math.random()*2+0.3,
-        sx:Math.random()*0.1-0.05,
-        sy:Math.random()*0.1-0.05
-    })
+function delComment(i){
+    commentList.splice(i,1);
+    localStorage.setItem('commentList',JSON.stringify(commentList));
+    renderComment();
 }
-function run(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    arr.forEach(v=>{
-        v.x+=v.sx;v.y+=v.sy;
-        if(v.x<0||v.x>canvas.width)v.sx*=-1;
-        if(v.y<0||v.y>canvas.height)v.sy*=-1;
-        ctx.beginPath();
-        ctx.arc(v.x,v.y,v.r,0,Math.PI*2);
-        ctx.fillStyle=document.body.classList.contains('light-mode')?"rgba(168,85,247,0.2)":"rgba(168,85,247,0.35)";
-        ctx.fill();
-    });
-    requestAnimationFrame(run);
-}
-run();
+renderComment();
 </script>
 </body>
 </html>
