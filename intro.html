@@ -5,113 +5,63 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>DN工作室 | 计算机·网络技术</title>
     <style>
+        :root{--bg:#04091a;--card:rgba(255,255,255,0.06);--text:#d1d9e8;--border:rgba(255,255,255,0.12);--btn-bg:rgba(255,255,255,0.08);}
+        .light-mode{--bg:#e8edf5;--card:rgba(255,255,255,0.75);--text:#111;--border:rgba(0,0,0,0.1);--btn-bg:rgba(0,0,0,0.05);}
         *{margin:0;padding:0;box-sizing:border-box;}
-        body{background:#04091a;color:#d1d9e8;line-height:2.1;}
+        body{background:var(--bg);color:var(--text);line-height:2.1;transition:background 0.5s;padding-top:70px;}
         #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;}
+
+        .island{
+            position:fixed;top:10px;left:50%;transform:translateX(-50%);
+            width:220px;height:36px;
+            background:rgba(0,0,0,0.3);
+            backdrop-filter:blur(20px);
+            border-radius:999px;
+            display:flex;align-items:center;justify-content:center;
+            z-index:999;
+            border:1px solid rgba(255,255,255,0.1);
+        }
+        .light-mode .island{background:rgba(255,255,255,0.6);}
+        .island iframe{width:200px;height:30px;border:none;border-radius:15px;}
+
         .wrap{max-width:1100px;margin:0 auto;padding:25px;}
         .top-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
         .top-nav h1{font-size:26px;background:linear-gradient(90deg,#22d3ee,#a855f7);-webkit-background-clip:text;color:transparent;}
-        .back-btn{
-            padding:7px 14px;
-            border-radius:8px;
-            text-decoration:none;
-            color:#fff;
-            /* 苹果磨砂玻璃 */
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border:1px solid rgba(255,255,255,0.15);
-        }
-        .tech-card{
-            border-radius:16px;
-            padding:22px;margin-bottom:20px;
-            /* 全局毛玻璃 */
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border:1px solid rgba(255,255,255,0.12);
-        }
+        .back-btn{padding:7px 14px;border-radius:8px;text-decoration:none;color:var(--text);background:var(--btn-bg);backdrop-filter:blur(12px);border:1px solid var(--border);}
+        .themeBtn{padding:7px 14px;border-radius:8px;color:var(--text);background:var(--btn-bg);border:1px solid var(--border);backdrop-filter:blur(12px);margin-left:10px;}
+        .tech-card{border-radius:16px;padding:22px;margin-bottom:20px;background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--border);}
         .tech-card h2{color:#22d3ee;margin-bottom:12px;font-size:18px;}
-        .tech-card p{color:#b4c5e4;}
+        .tech-card p{color:var(--text);opacity:0.9;}
         .tag-box{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;}
-        .tag{
-            padding:4px 10px;
-            border-radius:20px;font-size:13px;color:#fff;
-            background: rgba(168,85,247,0.2);
-            backdrop-filter: blur(8px);
-            border:1px solid rgba(255,255,255,0.1);
-        }
+        .tag{padding:4px 10px;border-radius:20px;font-size:13px;color:#fff;background:rgba(168,85,247,0.2);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);}
     </style>
 </head>
 <body>
+<div class="island">
+<iframe src="https://music.163.com/outchain/player?type=1&id=1399112638&auto=0&height=30"></iframe>
+</div>
+
 <canvas id="particles"></canvas>
 <div class="wrap">
     <div class="top-nav">
         <h1>DN 网络科技工作室</h1>
-        <a href="index.html" class="back-btn">返回首页</a>
-    </div>
-
-    <div class="tech-card">
-        <h2>🔎 工作室简介</h2>
-        <p>DN工作室 是专注于<strong>计算机底层技术、网络工程架构、云服务器运维、数字化搭建</strong>的专业技术团队。
-        深耕互联网基础建设，专注硬核技术研发与落地，为个人及小型团队提供稳定、安全、高效的一站式技术解决方案。</p>
-    </div>
-
-    <div class="tech-card">
-        <h2>💻 核心技术领域</h2>
-        <p>1. 网络工程：局域网/广域网搭建、路由交换配置、网络故障排查、网络拓扑优化</p>
-        <p>2. 服务器运维：云服务器、虚拟主机、游戏服务器、环境部署、后台维护</p>
-        <p>3. 前端开发：定制网页、可视化界面、科技风网站、动态交互页面制作</p>
-        <p>4. 网络安全：基础防火墙配置、访问权限管理、恶意访问拦截、数据防护</p>
-        <p>5. 计算机运维：软硬件检修、系统优化、环境调试、技术问题远程协助</p>
-    </div>
-
-    <div class="tech-card">
-        <h2>🎯 服务理念</h2>
-        <p>以技术为核心、以稳定为基础、以安全为底线。<br>
-        拒绝劣质搭建，坚持标准化、轻量化、高性能部署，专注长期稳定运行，
-        深耕计算机与互联网底层，持续输出优质技术能力。</p>
-    </div>
-
-    <div class="tech-card">
-        <h2>📌 技术标签</h2>
-        <div class="tag-box">
-            <span class="tag">网络搭建</span>
-            <span class="tag">服务器运维</span>
-            <span class="tag">计算机技术</span>
-            <span class="tag">网页开发</span>
-            <span class="tag">网络安全</span>
-            <span class="tag">架构部署</span>
+        <div style="display:flex;align-items:center;">
+            <a href="index.html" class="back-btn">返回</a>
+            <button class="themeBtn" id="themeBtn">浅色</button>
         </div>
     </div>
+    <div class="tech-card"><h2>🔎 工作室简介</h2><p>DN工作室 是专注于<strong>计算机底层技术、网络工程架构、云服务器运维、数字化搭建</strong>的专业技术团队我们有过许多的游戏外挂以及公益项目。深耕互联网基础建设，专注硬核技术研发与落地，为个人及小型团队提供稳定、安全、高效的一站式技术解决方案。</p></div>
+    <div class="tech-card"><h2>💻 核心技术领域</h2><p>1. 网络工程：局域网/广域网搭建、路由交换配置、网络故障排查、网络拓扑优化</p><p>2. 服务器运维：云服务器、虚拟主机、游戏服务器、环境部署、后台维护</p><p>3. 前端开发：定制网页、可视化界面、科技风网站、动态交互页面制作</p><p>4. 网络安全：基础防火墙配置、访问权限管理、恶意访问拦截、数据防护</p><p>5. 计算机运维：软硬件检修、系统优化、环境调试、技术问题远程协助</p></div>
+    <div class="tech-card"><h2>🎯 服务理念</h2><p>以技术为核心、以稳定为基础、以安全为底线。<br>拒绝劣质搭建，坚持标准化、轻量化、高性能部署，专注长期稳定运行，深耕计算机与互联网底层，持续输出优质技术能力。</p></div>
+    <div class="tech-card"><h2>📌 技术标签</h2><div class="tag-box"><span class="tag">网络搭建</span><span class="tag">服务器运维</span><span class="tag">计算机技术</span><span class="tag">网页开发</span><span class="tag">网络安全</span><span class="tag">架构部署</span></div></div>
 </div>
 
 <script>
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-canvas.width = innerWidth;
-canvas.height = innerHeight;
-let arr = [];
-for(let i=0;i<90;i++){
-    arr.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        r:Math.random()*2+0.3,
-        sx:Math.random()*0.12-0.06,
-        sy:Math.random()*0.12-0.06
-    })
-}
-function run(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    arr.forEach(v=>{
-        v.x+=v.sx;v.y+=v.sy;
-        if(v.x<0||v.x>canvas.width)v.sx*=-1;
-        if(v.y<0||v.y>canvas.height)v.sy*=-1;
-        ctx.beginPath();ctx.arc(v.x,v.y,v.r,0,Math.PI*2);
-        ctx.fillStyle="rgba(168,85,247,0.35)";ctx.fill();
-    })
-    requestAnimationFrame(run);
-}
+const themeBtn=document.getElementById('themeBtn');
+themeBtn.addEventListener('click',()=>{document.body.classList.toggle('light-mode');themeBtn.innerText=document.body.classList.contains('light-mode')?'深色':'浅色';});
+
+const canvas=document.getElementById('particles');const ctx=canvas.getContext('2d');canvas.width=innerWidth;canvas.height=innerHeight;let arr=[];for(let i=0;i<90;i++){arr.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+0.3,sx:Math.random()*0.1-0.05,sy:Math.random()*0.1-0.05})}
+function run(){ctx.clearRect(0,0,canvas.width,canvas.height);arr.forEach(v=>{v.x+=v.sx;v.y+=v.sy;if(v.x<0||v.x>canvas.width)v.sx*=-1;if(v.y<0||v.y>canvas.height)v.sy*=-1;ctx.beginPath();ctx.arc(v.x,v.y,v.r,0,Math.PI*2);ctx.fillStyle=document.body.classList.contains('light-mode')?"rgba(168,85,247,0.2)":"rgba(168,85,247,0.35)";ctx.fill()});requestAnimationFrame(run)}
 run();
 </script>
 </body>
