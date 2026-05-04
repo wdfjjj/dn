@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DN服务器 - 卡密验证</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"微软雅黑",sans-serif;}
+        body{
+            width:100%;
+            height:100vh;
+            overflow:hidden;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        /* 粒子动态背景 */
+        #particles{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:#0b1322;
+            z-index:-1;
+        }
+        .login-card{
+            background:rgba(22,33,62,0.85);
+            padding:40px 30px;
+            border-radius:16px;
+            box-shadow:0 0 30px #00adb560;
+            text-align:center;
+            width:90%;
+            max-width:420px;
+            animation:fadeIn 1s ease;
+        }
+        @keyframes fadeIn{
+            from{opacity:0;transform:translateY(-20px);}
+            to{opacity:1;transform:translateY(0);}
+        }
+        .login-card h2{
+            color:#fff;
+            margin-bottom:30px;
+            letter-spacing:3px;
+        }
+        .input-box{
+            width:100%;
+            padding:14px 18px;
+            border:none;
+            border-radius:8px;
+            background:#0f3460;
+            color:#fff;
+            font-size:16px;
+            margin-bottom:25px;
+            outline:none;
+            border:1px solid #224b80;
+            transition:0.3s;
+        }
+        .input-box:focus{
+            border-color:#00adb5;
+            box-shadow:0 0 8px #00adb550;
+        }
+        .submit-btn{
+            width:100%;
+            padding:13px;
+            border:none;
+            border-radius:8px;
+            background:#00adb5;
+            color:#fff;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+            margin-bottom:15px;
+        }
+        .submit-btn:hover{
+            background:#008a9c;
+            letter-spacing:2px;
+        }
+        /* 音乐控制 */
+        .music-btn{
+            position:fixed;
+            top:20px;
+            right:20px;
+            background:#00adb5;
+            color:#fff;
+            border:none;
+            padding:6px 12px;
+            border-radius:6px;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+    <button class="music-btn" id="musicBtn">暂停音乐</button>
+
+    <div class="login-card">
+        <h2>DN服务器 卡密验证</h2>
+        <input type="text" class="input-box" id="pwd" placeholder="请输入卡密">
+        <button class="submit-btn" onclick="checkPwd()">确认验证</button>
+    </div>
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_100KB_MP3.mp3" type="audio/mpeg">
+    
+
+    <script>
+        // 背景音乐控制
+        const music = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        music.volume = 0.2;
+        document.addEventListener('click',()=>music.play(),{once:true});
+        musicBtn.onclick = function(){
+            if(music.paused){
+                music.play();
+                musicBtn.innerText = "暂停音乐";
+            }else{
+                music.pause();
+                musicBtn.innerText = "播放音乐";
+            }
+        }
+
+        // 卡密判断
+        function checkPwd(){
+            let pwd = document.getElementById("pwd").value.trim();
+            if(pwd === "cyz201105"){
+                window.location.href = "admin.html";
+            }else if(pwd === "dnnb666"){
+                window.location.href = "intro.html";
+            }else{
+                alert("卡密错误，请重新输入！");
+            }
+        }
+
+        // 粒子背景
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particles = [];
+        class Particle{
+            constructor(){
+                this.x = Math.random()*canvas.width;
+                this.y = Math.random()*canvas.height;
+                this.r = Math.random()*2+1;
+                this.speedX = Math.random()*0.5-0.25;
+                this.speedY = Math.random()*0.5-0.25;
+            }
+            draw(){
+                ctx.beginPath();
+                ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+                ctx.fillStyle = "#00adb5";
+                ctx.fill();
+            }
+            update(){
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if(this.x<0||this.x>canvas.width)this.speedX*=-1;
+                if(this.y<0||this.y>canvas.height)this.speedY*=-1;
+                this.draw();
+            }
+        }
+        for(let i=0;i<80;i++) particles.push(new Particle());
+        function animate(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles.forEach(p=>p.update());
+            requestAnimationFrame(animate);
+        }
+        animate();
+        window.onresize = ()=>{
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+    </script>
+</body>
+</html>

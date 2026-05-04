@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>DN服务器 - 超级管理后台</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"微软雅黑",sans-serif;}
+        body{background:#050a18;color:#e6edf7;overflow-x:hidden;}
+        /* 粒子底层背景 */
+        #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;}
+        .container{padding:20px;max-width:1200px;margin:0 auto;}
+        .head-box{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;}
+        .head-box h1{font-size:24px;background:linear-gradient(90deg,#00d4ff,#7b61ff);-webkit-background-clip:text;color:transparent;}
+        .back-btn{
+            padding:8px 16px;
+            border-radius:8px;
+            color:#fff;
+            text-decoration:none;
+            transition:0.3s;
+            /* 苹果磨砂玻璃 */
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border:1px solid rgba(255,255,255,0.15);
+        }
+        .back-btn:hover{background:rgba(255,255,255,0.12);}
+
+        /* 卡片网格 */
+        .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:25px;}
+        .data-card{
+            border-radius:16px;
+            padding:20px;
+            transition:0.3s;
+            /* 苹果毛玻璃核心 */
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border:1px solid rgba(255,255,255,0.12);
+        }
+        .data-card:hover{border-color:rgba(0,212,255,0.3);transform:translateY(-2px);}
+        .data-card h3{color:#89cfff;margin-bottom:10px;font-size:15px;}
+        .data-num{font-size:28px;font-weight:bold;color:#fff;margin:8px 0;}
+        .progress-bar{width:100%;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;margin-top:8px;}
+        .progress-line{height:100%;background:linear-gradient(90deg,#00d4ff,#22c55e);border-radius:4px;transition:1.2s ease;}
+
+        /* 日志磨砂玻璃 */
+        .log-box{
+            border-radius:16px;
+            padding:20px;
+            background: rgba255,255,255,0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border:1px solid rgba(255,255,255,0.12);
+        }
+        .log-box h3{color:#b39dff;margin-bottom:12px;}
+        .log-text{height:180px;overflow:auto;color:#a0b4d8;font-size:14px;line-height:1.8;}
+
+        /* 悬浮窗磨砂 */
+        .float-admin{
+            position:fixed;right:20px;bottom:20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background:rgba(22,163,74,0.75);
+            border:1px solid rgba(255,255,255,0.15);
+            padding:10px 18px;border-radius:50px;z-index:999;display:flex;gap:10px;align-items:center;
+        }
+        .close-float{cursor:pointer;font-weight:bold;}
+    </style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="container">
+    <div class="head-box">
+        <h1>⚙️ DN 服务器综合管理中心</h1>
+        <a href="index.html" class="back-btn">返回首页</a>
+    </div>
+
+    <div class="card-grid">
+        <div class="data-card">
+            <h3>🖥️ CPU 使用率</h3>
+            <div class="data-num" id="cpuNum">0%</div>
+            <div class="progress-bar"><div class="progress-line" id="cpuBar"></div></div>
+        </div>
+        <div class="data-card">
+            <h3>🧠 内存占用</h3>
+            <div class="data-num" id="ramNum">0%</div>
+            <div class="progress-bar"><div class="progress-line" id="ramBar"></div></div>
+        </div>
+        <div class="data-card">
+            <h3>👥 当前在线人数</h3>
+            <div class="data-num" id="onlineNum">0</div>
+        </div>
+        <div class="data-card">
+            <h3>📶 实时网络延迟</h3>
+            <div class="data-num" id="pingNum">0 ms</div>
+        </div>
+        <div class="data-card">
+            <h3>📤 上行流量</h3>
+            <div class="data-num" id="upNum">0 MB/s</div>
+        </div>
+        <div class="data-card">
+            <h3>📥 下行流量</h3>
+            <div class="data-num" id="downNum">0 MB/s</div>
+        </div>
+    </div>
+
+    <div class="log-box">
+        <h3>📋 服务器实时运行日志</h3>
+        <div class="log-text" id="logBox">
+            <div>[系统] 管理权限验证通过</div>
+            <div>[系统] 服务器核心服务已启动</div>
+        </div>
+    </div>
+</div>
+
+<div class="float-admin" id="floatTip">
+    <span>✅ 检测到此卡密为超级管理</span>
+    <span class="close-float" onclick="closeTip()">×</span>
+</div>
+
+<script>
+function closeTip(){
+    document.getElementById("floatTip").style.display = "none";
+}
+
+// 改成【3.5秒刷新一次】超慢速，人数变化很平缓
+function randomData(){
+    let cpu = Math.floor(Math.random()*35 + 10);
+    let ram = Math.floor(Math.random()*45 + 15);
+    let online = Math.floor(Math.random()*20 + 5);
+    let ping = Math.floor(Math.random()*30 + 10);
+    let up = (Math.random()*1.2 + 0.2).toFixed(2);
+    let down = (Math.random()*3.5 + 0.8).toFixed(2);
+
+    document.getElementById("cpuNum").innerText = cpu + "%";
+    document.getElementById("ramNum").innerText = ram + "%";
+    document.getElementById("onlineNum").innerText = online;
+    document.getElementById("pingNum").innerText = ping + " ms";
+    document.getElementById("upNum").innerText = up + " MB/s";
+    document.getElementById("downNum").innerText = down + " MB/s";
+
+    document.getElementById("cpuBar").style.width = cpu + "%";
+    document.getElementById("ramBar").style.width = ram + "%";
+}
+setInterval(randomData, 3500);
+randomData();
+
+// 日志 6秒刷新一条，不刷屏
+const logList = ["线路监控正常","防火墙防护开启","数据备份定时执行","节点连接稳定","权限系统运行正常"];
+setInterval(()=>{
+    let time = new Date().toLocaleTimeString();
+    let r = logList[Math.floor(Math.random()*logList.length)];
+    document.getElementById("logBox").innerHTML += `<div>[${time}] ${r}</div>`;
+    document.getElementById("logBox").scrollTop = document.getElementById("logBox").scrollHeight;
+},6000);
+
+// 粒子背景
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+let arr = [];
+for(let i=0;i<80;i++){
+    arr.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*2+0.5,
+        sx:Math.random()*0.15-0.07,
+        sy:Math.random()*0.15-0.07
+    })
+}
+function run(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    arr.forEach(v=>{
+        v.x+=v.sx;v.y+=v.sy;
+        if(v.x<0||v.x>canvas.width)v.sx*=-1;
+        if(v.y<0||v.y>canvas.height)v.sy*=-1;
+        ctx.beginPath();ctx.arc(v.x,v.y,v.r,0,Math.PI*2);
+        ctx.fillStyle = "rgba(0,212,255,0.35)";ctx.fill();
+    })
+    requestAnimationFrame(run);
+}
+run();
+</script>
+</body>
+</html>
