@@ -3,15 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>DN工作室 | 计算机·网络技术</title>
+    <title>DN工作室 | 个人中心</title>
     <style>
-        :root{--bg:#04091a;--card:rgba(255,255,255,0.06);--text:#d1d9e8;--border:rgba(255,255,255,0.12);--btn-bg:rgba(255,255,255,0.08);}
-        .light-mode{--bg:#e8edf5;--card:rgba(255,255,255,0.75);--text:#111;--border:rgba(0,0,0,0.1);--btn-bg:rgba(0,0,0,0.05);}
+        :root{
+            --bg:#04091a;
+            --card:rgba(255,255,255,0.06);
+            --text:#d1d9e8;
+            --border:rgba(255,255,255,0.12);
+            --btn-bg:rgba(255,255,255,0.08);
+            --main:#22d3ee;
+            --purple:#a855f7;
+        }
+        .light-mode{
+            --bg:#e8edf5;
+            --card:rgba(255,255,255,0.75);
+            --text:#111;
+            --border:rgba(0,0,0,0.1);
+            --btn-bg:rgba(0,0,0,0.05);
+        }
         *{margin:0;padding:0;box-sizing:border-box;}
         body{background:var(--bg);color:var(--text);line-height:2.1;transition:background 0.5s;padding-top:70px;}
         #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;}
 
-        /* 灵动岛播放器 */
+        /* 灵动岛音乐 */
         .island{
             position:fixed;top:10px;left:50%;transform:translateX(-50%);
             width:240px;height:40px;
@@ -27,21 +41,45 @@
         .island audio{width:230px;height:35px;border-radius:20px;}
 
         .wrap{max-width:1100px;margin:0 auto;padding:25px;}
-        .top-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
-        .top-nav h1{font-size:26px;background:linear-gradient(90deg,#22d3ee,#a855f7);-webkit-background-clip:text;color:transparent;}
-        .back-btn{padding:7px 14px;border-radius:8px;text-decoration:none;color:var(--text);background:var(--btn-bg);backdrop-filter:blur(12px);border:1px solid var(--border);}
-        .themeBtn{padding:7px 14px;border-radius:8px;color:var(--text);background:var(--btn-bg);border:1px solid var(--border);backdrop-filter:blur(12px);margin-left:10px;}
-        .tech-card{border-radius:16px;padding:22px;margin-bottom:20px;background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--border);}
-        .tech-card h2{color:#22d3ee;margin-bottom:12px;font-size:18px;}
-        .tech-card p{color:var(--text);opacity:0.9;}
-        .tag-box{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;}
-        .tag{padding:4px 10px;border-radius:20px;font-size:13px;color:#fff;background:rgba(168,85,247,0.2);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);}
+        .top-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+        .top-nav h1{font-size:26px;background:linear-gradient(90deg,var(--main),var(--purple));-webkit-background-clip:text;color:transparent;}
+        .back-btn,.themeBtn{padding:7px 14px;border-radius:8px;text-decoration:none;color:var(--text);background:var(--btn-bg);border:1px solid var(--border);backdrop-filter:blur(12px);cursor:pointer;}
+        .themeBtn{margin-left:10px;}
 
-        /* 评论区样式 */
-        .comment-box{border-radius:16px;padding:22px;margin-top:30px;background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--border);}
-        .comment-box h2{color:#a855f7;margin-bottom:15px;}
+        /* 标签页切换 */
+        .tab-box{display:flex;gap:8px;margin-bottom:20px;}
+        .tab-item{
+            flex:1;text-align:center;padding:10px;border-radius:10px;
+            background:var(--btn-bg);border:1px solid var(--border);
+            cursor:pointer;transition:0.3s;
+        }
+        .tab-item.active{background:var(--main);color:#000;border-color:var(--main);}
+        .tab-content{display:none;}
+        .tab-content.show{display:block;}
+
+        /* 通用卡片 */
+        .card{border-radius:16px;padding:22px;margin-bottom:20px;background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--border);}
+        .card h2{color:var(--purple);margin-bottom:15px;font-size:18px;}
+        .card p{opacity:0.9;}
+        .tag-box{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;}
+        .tag{padding:4px 10px;border-radius:20px;font-size:13px;background:rgba(168,85,247,0.2);border:1px solid var(--border);}
+
+        /* 个人主页 */
+        .user-row{display:flex;justify-content:space-between;padding:6px 0;}
+        .level{color:#ffb703;font-weight:bold;}
+        .point{color:#22c55e;font-weight:bold;}
+        .time-text{opacity:0.8;font-size:14px;}
+
+        /* 功能区 */
+        .func-item{padding:12px;border-radius:10px;background:var(--btn-bg);border:1px solid var(--border);margin-bottom:10px;text-align:center;cursor:pointer;}
+        .func-content{display:none;padding:10px;margin-top:8px;border-radius:8px;background:rgba(255,255,255,0.05);}
+        .tool-input{width:100%;padding:8px;border-radius:6px;background:var(--btn-bg);border:1px solid var(--border);color:var(--text);margin:6px 0;outline:none;}
+        .tool-btn{padding:6px 12px;border-radius:6px;border:none;background:var(--main);color:#000;margin:4px;cursor:pointer;}
+
+        /* 评论区 */
+        .comment-box{margin-top:30px;}
         .com-input{width:100%;padding:12px;border-radius:8px;background:var(--btn-bg);border:1px solid var(--border);color:var(--text);outline:none;margin-bottom:10px;}
-        .com-btn{padding:8px 20px;border-radius:8px;border:none;background:#22d3ee;color:#000;cursor:pointer;}
+        .com-btn{padding:8px 20px;border-radius:8px;border:none;background:var(--main);color:#000;cursor:pointer;}
         .com-list{margin-top:20px;max-height:300px;overflow:auto;}
         .com-item{padding:10px;border-bottom:1px solid var(--border);font-size:14px;}
     </style>
@@ -55,35 +93,190 @@
 <canvas id="particles"></canvas>
 <div class="wrap">
     <div class="top-nav">
-        <h1>DN 网络科技工作室</h1>
+        <h1>DN 工作室中心</h1>
         <div style="display:flex;align-items:center;">
             <a href="index.html" class="back-btn">返回首页</a>
             <button class="themeBtn" id="themeBtn">浅色</button>
         </div>
     </div>
-    <div class="tech-card"><h2>🔎 工作室简介</h2><p>DN工作室 是专注于<strong>计算机底层技术以前游戏漏洞研究开发有各种游戏辅助主要人员有DN与对你开发需要可以联系DN本人QQ已掉为大家带来了不便、网络工程架构、云服务器运维、数字化搭建</strong>的专业技术团队。深耕互联网基础建设，专注硬核技术研发与落地，为个人及小型团队提供稳定、安全、高效的一站式技术解决方案。</p></div>
-    <div class="tech-card"><h2>💻 核心技术领域</h2><p>1. 网络工程：局域网/广域网搭建、路由交换配置、网络故障排查、网络拓扑优化</p><p>2. 服务器运维：云服务器、虚拟主机、游戏服务器、环境部署、后台维护</p><p>3. 前端开发：定制网页、可视化界面、科技风网站、动态交互页面制作</p><p>4. 网络安全：基础防火墙配置、访问权限管理、恶意访问拦截、数据防护</p><p>5. 计算机运维：软硬件检修、系统优化、环境调试、技术问题远程协助</p></div>
-    <div class="tech-card"><h2>🎯 服务理念</h2><p>以技术为核心、以稳定为基础、以安全为底线。<br>拒绝劣质搭建，坚持标准化、轻量化、高性能部署，专注长期稳定运行，深耕计算机与互联网底层，持续输出优质技术能力。</p></div>
-    <div class="tech-card"><h2>📌 技术标签</h2><div class="tag-box"><span class="tag">网络搭建</span><span class="tag">服务器运维</span><span class="tag">计算机技术</span><span class="tag">网页开发</span><span class="tag">网络安全</span><span class="tag">架构部署</span></div></div>
 
-    <!-- 评论区 -->
-    <div class="comment-box">
-        <h2>💬 游客评论区</h2>
-        <input class="com-input" id="comName" placeholder="输入昵称">
-        <textarea class="com-input" id="comText" rows="3" placeholder="输入评论内容..."></textarea>
-        <button class="com-btn" onclick="sendComment()">发送评论</button>
+    <!-- 三大切换标签 -->
+    <div class="tab-box">
+        <div class="tab-item active" data-tab="user">👤 个人主页</div>
+        <div class="tab-item" data-tab="intro">📖 工作室介绍</div>
+        <div class="tab-item" data-tab="func">⚙️ 功能专区</div>
+    </div>
+
+    <!-- 1.个人主页 -->
+    <div class="tab-content show" id="user">
+        <div class="card">
+            <h2>个人信息面板</h2>
+            <div class="user-row"><span>📅 注册时间</span><span id="regTime" class="time-text"></span></div>
+            <div class="user-row"><span>⏱️ 累计在线</span><span id="liveTime" class="time-text"></span></div>
+            <div class="user-row"><span>🏅 当前等级</span><span id="userLevel" class="level">Lv.1 普通游客</span></div>
+            <div class="user-row"><span>💎 账号积分</span><span id="userPoint" class="point">0</span></div>
+        </div>
+    </div>
+
+    <!-- 2.工作室介绍 -->
+    <div class="tab-content" id="intro">
+        <div class="card">
+            <h2>🔎 工作室简介</h2>
+            <p>DN工作室 是专注于<strong>计算机底层技术、网络工程架构、云服务器运维、数字化搭建</strong>的专业技术团队。
+            深耕互联网技术领域，提供稳定、安全、高效的一站式服务。</p>
+        </div>
+        <div class="card">
+            <h2>💻 核心技术领域</h2>
+            <p>1. 网络工程部署与维护<br>2. 云服务器搭建 & 运维<br>3. 前端网页定制开发<br>4. 网络安全防护<br>5. 计算机软硬件维护</p>
+        </div>
+        <div class="card">
+            <h2>🎯 服务理念</h2>
+            <p>以技术为核心、以稳定为基础、以安全为底线。<br>用心服务每一位用户，长期稳定运营。</p>
+            <div class="tag-box">
+                <span class="tag">网络搭建</span>
+                <span class="tag">服务器运维</span>
+                <span class="tag">网页开发</span>
+                <span class="tag">网络安全</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3.功能专区 -->
+    <div class="tab-content" id="func">
+        <div class="card">
+            <h2>⚙️ 实用功能区</h2>
+            <div class="func-item" onclick="toggleFunc('announce')">📜 全站公告查看
+                <div id="announce" class="func-content">全力更新辅助那个加密你粘贴进去然后加密就可以了有问题我暂时闹不好</div>
+            </div>
+            <div class="func-item" onclick="toggleFunc('feedback')">💡 帮助与反馈
+                <div id="feedback" class="func-content">明明没有问题好吧</div>
+            </div>
+            <!-- RLGG加密工具 -->
+            <div class="func-item" onclick="toggleFunc('rlggTool')">🔐 RLGG加密工具
+                <div id="rlggTool" class="func-content">
+                    <input type="text" class="tool-input" id="rlggText" placeholder="输入需要加密/解密内容">
+                    <div>
+                        <button class="tool-btn" onclick="rlggEncode()">加密</button>
+                        <button class="tool-btn" onclick="rlggDecode()">解密</button>
+                    </div>
+                    <input type="text" class="tool-input" id="rlggResult" placeholder="输出结果" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部评论区 -->
+    <div class="card comment-box">
+        <h2>💬 游客公开评论区</h2>
+        <input class="com-input" id="comName" placeholder="输入你的昵称">
+        <textarea class="com-input" id="comText" rows="3" placeholder="写下你的评论..."></textarea>
+        <button class="com-btn" onclick="sendComment()">立即发送</button>
         <div class="com-list" id="comList"></div>
     </div>
 </div>
 
 <script>
+// 明暗切换
 const themeBtn=document.getElementById('themeBtn');
-themeBtn.addEventListener('click',()=>{document.body.classList.toggle('light-mode');themeBtn.innerText=document.body.classList.contains('light-mode')?'深色':'浅色';});
+themeBtn.addEventListener('click',()=>{
+    document.body.classList.toggle('light-mode');
+    themeBtn.innerText=document.body.classList.contains('light-mode')?'深色':'浅色';
+});
 
-// 评论功能
+// ========== 标签页切换 ==========
+const tabItems = document.querySelectorAll('.tab-item');
+const tabContents = document.querySelectorAll('.tab-content');
+tabItems.forEach(tab=>{
+    tab.onclick = function(){
+        tabItems.forEach(t=>t.classList.remove('active'));
+        tabContents.forEach(c=>c.classList.remove('show'));
+        this.classList.add('active');
+        let tid = this.dataset.tab;
+        document.getElementById(tid).classList.add('show');
+    }
+});
+
+// ========== 功能区展开/隐藏 ==========
+function toggleFunc(id){
+    let el = document.getElementById(id);
+    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+// ========== RLGG 加密算法 ==========
+// 标准RLGG对称加解密
+const RLGG_KEY = "rlgg2026";
+
+function rlggEncode(){
+    let str = document.getElementById("rlggText").value;
+    if(!str) return alert("请输入内容");
+    let res = "";
+    for(let i=0;i<str.length;i++){
+        let code = str.charCodeAt(i) ^ RLGG_KEY.charCodeAt(i % RLGG_KEY.length);
+        res += String.fromCharCode(code);
+    }
+    // 转为base64方便传输
+    document.getElementById("rlggResult").value = btoa(unescape(encodeURIComponent(res)));
+}
+function rlggDecode(){
+    let str = document.getElementById("rlggText").value;
+    if(!str) return alert("请输入内容");
+    try{
+        let raw = decodeURIComponent(escape(atob(str)));
+        let res = "";
+        for(let i=0;i<raw.length;i++){
+            let code = raw.charCodeAt(i) ^ RLGG_KEY.charCodeAt(i % RLGG_KEY.length);
+            res += String.fromCharCode(code);
+        }
+        document.getElementById("rlggResult").value = res;
+    }catch(e){
+        alert("解密失败，内容不是RLGG加密文本");
+    }
+}
+
+// ========== 等级积分系统 ==========
+let userData = JSON.parse(localStorage.getItem("dnUserData")) || {
+    regTime: new Date().getTime(),
+    totalSec: 0,
+    point: 0
+};
+
+setInterval(()=>{
+    userData.totalSec++;
+    if(userData.totalSec % 10 === 0) userData.point++;
+    localStorage.setItem("dnUserData", JSON.stringify(userData));
+    renderUser();
+},1000);
+
+function getLevel(s){
+    if(s < 60)  return {lv:1,name:"普通游客"};
+    if(s < 300) return {lv:2,name:"初级访客"};
+    if(s < 900) return {lv:3,name:"常驻用户"};
+    if(s < 3600)return {lv:4,name:"资深会员"};
+    if(s < 10800)return{lv:5,name:"核心成员"};
+    return {lv:6,name:"荣誉元老"};
+}
+
+function formatTime(s){
+    let h = Math.floor(s/3600);
+    let m = Math.floor(s%3600/60);
+    let sec = s%60;
+    return `${h}时${m}分${sec}秒`;
+}
+
+function renderUser(){
+    let reg = new Date(userData.regTime);
+    let lv = getLevel(userData.totalSec);
+    document.getElementById("regTime").innerText = reg.toLocaleDateString();
+    document.getElementById("liveTime").innerText = formatTime(userData.totalSec);
+    document.getElementById("userLevel").innerText = `Lv.${lv.lv} ${lv.name}`;
+    document.getElementById("userPoint").innerText = userData.point;
+}
+renderUser();
+
+// ========== 评论区 ==========
 function getComment(){
-    let data = localStorage.getItem("dnComment");
-    return data ? JSON.parse(data) : [];
+    let d = localStorage.getItem("dnComment");
+    return d ? JSON.parse(d) : [];
 }
 function showComment(){
     let arr = getComment();
@@ -94,22 +287,46 @@ function showComment(){
     document.getElementById("comList").innerHTML = html;
 }
 function sendComment(){
-    let name = document.getElementById("comName").value.trim();
-    let msg = document.getElementById("comText").value.trim();
-    if(!name||!msg){alert("昵称和评论不能为空");return;}
-    let time = new Date().toLocaleString();
+    let n = document.getElementById("comName").value.trim();
+    let m = document.getElementById("comText").value.trim();
+    if(!n||!m) return alert("昵称和评论不能为空！");
     let arr = getComment();
-    arr.push({name,msg,time});
+    arr.push({
+        name:n,msg:m,time:new Date().toLocaleString()
+    });
     localStorage.setItem("dnComment",JSON.stringify(arr));
     showComment();
     document.getElementById("comText").value = "";
 }
-// 打开自动加载评论
 showComment();
 
 // 粒子背景
-const canvas=document.getElementById('particles');const ctx=canvas.getContext('2d');canvas.width=innerWidth;canvas.height=innerHeight;let arr=[];for(let i=0;i<90;i++){arr.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+0.3,sx:Math.random()*0.1-0.05,sy:Math.random()*0.1-0.05})}
-function run(){ctx.clearRect(0,0,canvas.width,canvas.height);arr.forEach(v=>{v.x+=v.sx;v.y+=v.sy;if(v.x<0||v.x>canvas.width)v.sx*=-1;if(v.y<0||v.y>canvas.height)v.sy*=-1;ctx.beginPath();ctx.arc(v.x,v.y,v.r,0,Math.PI*2);ctx.fillStyle=document.body.classList.contains('light-mode')?"rgba(168,85,247,0.2)":"rgba(168,85,247,0.35)";ctx.fill()});requestAnimationFrame(run)}
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+canvas.width=innerWidth;canvas.height=innerHeight;
+let arr=[];
+for(let i=0;i<90;i++){
+    arr.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*2+0.3,
+        sx:Math.random()*0.1-0.05,
+        sy:Math.random()*0.1-0.05
+    })
+}
+function run(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    arr.forEach(v=>{
+        v.x+=v.sx;v.y+=v.sy;
+        if(v.x<0||v.x>canvas.width)v.sx*=-1;
+        if(v.y<0||v.y>canvas.height)v.sy*=-1;
+        ctx.beginPath();
+        ctx.arc(v.x,v.y,v.r,0,Math.PI*2);
+        ctx.fillStyle=document.body.classList.contains('light-mode')?"rgba(168,85,247,0.2)":"rgba(168,85,247,0.35)";
+        ctx.fill();
+    });
+    requestAnimationFrame(run);
+}
 run();
 </script>
 </body>
