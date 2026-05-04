@@ -24,198 +24,106 @@
             padding-bottom:80px;
             background-attachment:fixed;
         }
-        /* 加载动画 */
         .loading{
-            position:fixed;
-            top:0;left:0;
-            width:100%;height:100%;
-            background:var(--bg-main);
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            z-index:9999;
-            transition:opacity 0.5s ease;
+            position:fixed;top:0;left:0;width:100%;height:100%;
+            background:var(--bg-main);display:flex;justify-content:center;align-items:center;
+            z-index:9999;transition:opacity 0.5s ease;
         }
         .loading.hide{opacity:0;pointer-events:none;}
         .load-circle{
-            width:56px;height:56px;
-            border:3px solid var(--border);
-            border-top-color:var(--accent);
-            border-radius:50%;
-            animation:rotate 1s linear infinite;
+            width:56px;height:56px;border:3px solid var(--border);
+            border-top-color:var(--accent);border-radius:50%;animation:rotate 1s linear infinite;
         }
         @keyframes rotate{to{transform:rotate(360deg);}}
 
-        /* 导航栏高级磨砂 */
         .nav{
-            width:100%;
-            background:rgba(12,18,28,0.65);
-            backdrop-filter:blur(12px);
-            -webkit-backdrop-filter:blur(12px);
-            border-bottom:1px solid var(--border);
-            padding:14px 0;
-            text-align:center;
-            position:sticky;
-            top:0;z-index:99;
+            width:100%;background:rgba(12,18,28,0.65);backdrop-filter:blur(12px);
+            -webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
+            padding:14px 0;text-align:center;position:sticky;top:0;z-index:99;
         }
         .nav a{
-            color:var(--text-secondary);
-            text-decoration:none;
-            margin:0 14px;
-            padding:8px 14px;
-            border-radius:8px;
-            transition:all 0.3s ease;
-            font-size:14px;
-            letter-spacing:0.5px;
+            color:var(--text-secondary);text-decoration:none;margin:0 14px;padding:8px 14px;
+            border-radius:8px;transition:all 0.3s ease;font-size:14px;letter-spacing:0.5px;
         }
-        .nav a:hover{
-            background:rgba(255,255,255,0.06);
-            color:var(--accent-hover);
-        }
-        .nav a.active{
-            background:var(--accent);
-            color:#fff;
-            box-shadow:0 4px 12px rgba(59,130,246,0.25);
-        }
+        .nav a:hover{background:rgba(255,255,255,0.06);color:var(--accent-hover);}
+        .nav a.active{background:var(--accent);color:#fff;box-shadow:0 4px 12px rgba(59,130,246,0.25);}
 
         .container{width:92%;max-width:1200px;margin:40px auto;}
         .card{
-            background:var(--bg-card);
-            backdrop-filter:blur(8px);
-            -webkit-backdrop-filter:blur(8px);
-            border:1px solid var(--border);
-            border-radius:16px;
-            padding:28px;
-            margin-bottom:24px;
-            box-shadow:0 8px 30px rgba(0,0,0,0.2);
-            transition:transform 0.3s ease,box-shadow 0.3s ease;
+            background:var(--bg-card);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+            border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:24px;
+            box-shadow:0 8px 30px rgba(0,0,0,0.2);transition:transform 0.3s ease,box-shadow 0.3s ease;
         }
-        .card:hover{
-            transform:translateY(-3px);
-            box-shadow:0 12px 40px rgba(0,0,0,0.3);
-        }
+        .card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.3);}
         h2{
-            color:var(--text-primary);
-            margin-bottom:18px;
-            font-size:20px;
-            font-weight:600;
-            letter-spacing:0.3px;
+            color:var(--text-primary);margin-bottom:18px;font-size:20px;font-weight:600;letter-spacing:0.3px;
         }
-        p{
-            color:var(--text-secondary);
-            line-height:1.8;
-            margin-bottom:12px;
-            font-size:15px;
-        }
+        p{color:var(--text-secondary);line-height:1.8;margin-bottom:12px;font-size:15px;}
 
-        /* 输入框高级样式 */
         textarea,input{
-            width:100%;
-            background:rgba(255,255,255,0.04);
-            border:1px solid var(--border);
-            border-radius:10px;
-            padding:12px 16px;
-            color:var(--text-primary);
-            margin:10px 0;
-            outline:none;
-            transition:border 0.3s ease,background 0.3s ease;
-            font-size:14px;
+            width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);
+            border-radius:10px;padding:12px 16px;color:var(--text-primary);margin:10px 0;
+            outline:none;transition:border 0.3s ease,background 0.3s ease;font-size:14px;
         }
-        textarea:focus,input:focus{
-            border-color:var(--accent);
-            background:rgba(255,255,255,0.06);
-        }
+        textarea:focus,input:focus{border-color:var(--accent);background:rgba(255,255,255,0.06);}
         textarea{min-height:110px;resize:vertical;}
         button{
-            background:var(--accent);
-            color:#fff;
-            border:none;
-            padding:10px 18px;
-            border-radius:10px;
-            cursor:pointer;
-            transition:all 0.3s ease;
-            margin:6px;
-            font-size:14px;
-            font-weight:500;
+            background:var(--accent);color:#fff;border:none;padding:10px 18px;border-radius:10px;
+            cursor:pointer;transition:all 0.3s ease;margin:6px;font-size:14px;font-weight:500;
         }
-        button:hover{
-            background:var(--accent-hover);
-            box-shadow:0 4px 14px rgba(59,130,246,0.22);
-        }
+        button:hover{background:var(--accent-hover);box-shadow:0 4px 14px rgba(59,130,246,0.22);}
         .btn-red{background:var(--danger);}
         .btn-red:hover{background:#f87171;}
         .btn-green{background:var(--success);}
         .btn-green:hover{background:#34d399;}
 
-        /* 等级进度条美化 */
-        .progress-wrap{
-            width:100%;
-            height:12px;
-            background:rgba(255,255,255,0.06);
-            border-radius:6px;
-            overflow:hidden;
-            margin:14px 0;
+        /* DN下载按钮 高级渐变 */
+        .btn-dn{
+            background:linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899);
+            color:#fff;border:none;padding:14px 26px;border-radius:12px;
+            cursor:pointer;transition:all 0.3s ease;font-size:15px;font-weight:600;
+            box-shadow:0 6px 22px rgba(99,102,241,0.35);border:none;
         }
-        .progress-bar{
-            height:100%;
-            background:linear-gradient(90deg,var(--accent),var(--accent-hover));
-            width:0%;
-            transition:0.6s ease;
-            border-radius:6px;
+        .btn-dn:hover{
+            transform:translateY(-3px);box-shadow:0 10px 30px rgba(99,102,241,0.45);
+            background:linear-gradient(135deg,#4f46e5,#7c3aed,#db2777);
         }
 
-        /* 回到顶部 */
+        .progress-wrap{
+            width:100%;height:12px;background:rgba(255,255,255,0.06);
+            border-radius:6px;overflow:hidden;margin:14px 0;
+        }
+        .progress-bar{
+            height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-hover));
+            width:0%;transition:0.6s ease;border-radius:6px;
+        }
+
         .back-top{
-            position:fixed;
-            bottom:30px;right:30px;
-            width:50px;height:50px;
-            background:var(--accent);
-            border-radius:50%;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            color:#fff;
-            cursor:pointer;
-            opacity:0;
-            transition:all 0.3s ease;
-            z-index:98;
-            box-shadow:0 6px 20px rgba(59,130,246,0.3);
-            font-size:18px;
+            position:fixed;bottom:30px;right:30px;width:50px;height:50px;
+            background:var(--accent);border-radius:50%;display:flex;justify-content:center;
+            align-items:center;color:#fff;cursor:pointer;opacity:0;transition:all 0.3s ease;
+            z-index:98;box-shadow:0 6px 20px rgba(59,130,246,0.3);font-size:18px;
         }
         .back-top.show{opacity:1;}
         .back-top:hover{transform:translateY(-4px);}
 
-        /* 音乐控制 */
         .music-ctrl{
-            position:fixed;
-            bottom:30px;left:30px;
-            background:var(--bg-card);
-            backdrop-filter:blur(10px);
-            border:1px solid var(--border);
-            border-radius:12px;
-            padding:10px 16px;
-            z-index:98;
+            position:fixed;bottom:30px;left:30px;background:var(--bg-card);
+            backdrop-filter:blur(10px);border:1px solid var(--border);
+            border-radius:12px;padding:10px 16px;z-index:98;
         }
 
-        /* 页面模块 */
         .page{display:none;}
         .page.show{display:block;animation:fadeIn 0.4s ease;}
         @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 
-        /* 评论项 */
-        .comment-item{
-            padding:16px 0;
-            border-bottom:1px solid var(--border);
-        }
+        .comment-item{padding:16px 0;border-bottom:1px solid var(--border);}
     </style>
 </head>
 <body>
-<!-- 加载动画 -->
-<div class="loading" id="loading">
-    <div class="load-circle"></div>
-</div>
 
-<!-- 导航 -->
+<div class="loading" id="loading"><div class="load-circle"></div></div>
+
 <div class="nav">
     <a href="javascript:switchPage('home')" class="active" data-page="home">首页</a>
     <a href="javascript:switchPage('intro')" data-page="intro">介绍</a>
@@ -226,43 +134,31 @@
 </div>
 
 <div class="container">
-    <!-- 首页：极简高级 -->
+    <!-- 首页 -->
     <div class="page show" id="page-home">
         <div class="card">
             <h2>🎉 欢迎来到 RLGG 综合站点</h2>
             <p>本站为极简高级风多功能工具站，全部数据本地离线储存，轻量化无广告，沉浸式使用体验。</p>
             <p>如需了解全站功能、系统规则与工具详情，可前往「介绍」页面查看完整说明。</p>
         </div>
+
+        <!-- ✅ DN游戏辅助 高级下载卡片 -->
+        <div class="card" style="border:1px solid rgba(99,102,241,0.2);">
+            <h2 style="background:linear-gradient(135deg,#6366f1,#ec4899);-webkit-background-clip:text;color:transparent;">🎮 DN游戏辅助 · 官方下载</h2>
+            <p>稳定兼容 · 安全无捆绑 · 一键启动 · 持续更新维护</p>
+            <p style="color:#cbd5e1;font-size:14px;">适配安卓系统，点击下方按钮直接下载</p>
+            <a href="https://mpimg.cn/down.php/d52790ee6f479ffd5b5858025b93002c.apk" target="_blank" style="text-decoration:none;">
+                <button class="btn-dn">⚡ 立即下载 DN游戏辅助</button>
+            </a>
+        </div>
     </div>
 
-    <!-- 介绍页：高级排版+全部功能说明 -->
+    <!-- 介绍页 -->
     <div class="page" id="page-intro">
-        <div class="card">
-            <h2>📖 站点概述</h2>
-            <p>RLGG 综合站点，集成实用工具、个人成长体系、社区评论、公告资讯于一体，采用现代磨砂设计，视觉简洁高级，操作流畅舒适。</p>
-        </div>
-        <div class="card">
-            <h2>✅ 核心功能一览</h2>
-            <p>• 全局体验：渐变加载动画、磨砂导航、悬浮按钮、平滑滚动</p>
-            <p>• 实用工具：RLGG 加解密、Base64 转换、时间戳换算、文本压缩</p>
-            <p>• 成长系统：等级积分、可视化升级进度、在线统计、专属称号商城</p>
-            <p>• 社区互动：实时评论发布、自主删评、整洁社区管理</p>
-            <p>• 便捷功能：结果一键复制、背景音乐控制、一键返回顶部</p>
-        </div>
-        <div class="card">
-            <h2>📌 系统规则</h2>
-            <p>• 等级体系：逐级积分晋升，进度条直观展示升级进度</p>
-            <p>• 积分商城：消耗积分解锁专属标识，个性化展示</p>
-            <p>• 本地存储：所有用户数据本地留存，刷新不丢失</p>
-            <p>• 社区规范：文明发言，共同维护整洁使用环境</p>
-        </div>
-        <div class="card">
-            <h2>🧰 工具简述</h2>
-            <p>• RLGG 加密：定制轻量化加密方案，快速加解密+一键复制</p>
-            <p>• Base64：通用编码转换，满足日常文本处理需求</p>
-            <p>• 时间戳：标准时间与毫秒时间戳双向快速转换</p>
-            <p>• 文本压缩：精简长文本体积，便于传输与储存</p>
-        </div>
+        <div class="card"><h2>📖 站点概述</h2><p>RLGG 综合站点，集成实用工具、个人成长体系、社区评论、公告资讯于一体，采用现代磨砂设计，视觉简洁高级，操作流畅舒适。</p></div>
+        <div class="card"><h2>✅ 核心功能一览</h2><p>• 全局体验：渐变加载动画、磨砂导航、悬浮按钮、平滑滚动</p><p>• 实用工具：RLGG 加解密、Base64 转换、时间戳换算、文本压缩</p><p>• 成长系统：等级积分、可视化升级进度、在线统计、专属称号商城</p><p>• 社区互动：实时评论发布、自主删评、整洁社区管理</p><p>• 便捷功能：结果一键复制、背景音乐控制、一键返回顶部</p></div>
+        <div class="card"><h2>📌 系统规则</h2><p>• 等级体系：逐级积分晋升，进度条直观展示升级进度</p><p>• 积分商城：消耗积分解锁专属标识，个性化展示</p><p>• 本地存储：所有用户数据本地留存，刷新不丢失</p><p>• 社区规范：文明发言，共同维护整洁使用环境</p></div>
+        <div class="card"><h2>🧰 工具简述</h2><p>• RLGG 加密：定制轻量化加密方案，快速加解密+一键复制</p><p>• Base64：通用编码转换，满足日常文本处理需求</p><p>• 时间戳：标准时间与毫秒时间戳双向快速转换</p><p>• 文本压缩：精简长文本体积，便于传输与储存</p></div>
     </div>
 
     <!-- 个人中心 -->
@@ -273,229 +169,62 @@
             <p>当前等级：<span id="userLv">1</span> 级</p>
             <p>当前积分：<span id="userScore">0</span></p>
             <p>升级所需积分：<span id="needScore">100</span></p>
-            <div class="progress-wrap">
-                <div class="progress-bar" id="lvProgress"></div>
-            </div>
+            <div class="progress-wrap"><div class="progress-bar" id="lvProgress"></div></div>
             <p>连续登录天数：<span id="loginDay">0</span> 天</p>
             <p>累计在线天数：<span id="onlineDay">0</span> 天</p>
             <p>专属称号：<span id="userTitle">普通访客</span></p>
             <button onclick="resetUserData()" class="btn-red">一键清空个人数据</button>
         </div>
-        <div class="card">
-            <h2>🎁 积分商城</h2>
-            <button onclick="buyTitle(1,200)">兑换【活跃用户】(200积分)</button>
-            <button onclick="buyTitle(2,500)">兑换【资深成员】(500积分)</button>
-            <button onclick="buyTitle(3,1000)">兑换【元老用户】(1000积分)</button>
-        </div>
+        <div class="card"><h2>🎁 积分商城</h2><button onclick="buyTitle(1,200)">兑换【活跃用户】(200积分)</button><button onclick="buyTitle(2,500)">兑换【资深成员】(500积分)</button><button onclick="buyTitle(3,1000)">兑换【元老用户】(1000积分)</button></div>
     </div>
 
     <!-- 工具合集 -->
     <div class="page" id="page-tool">
-        <div class="card">
-            <h2>🔐 RLGG 加解密</h2>
-            <textarea id="rlggIn" placeholder="请输入需要处理的内容"></textarea>
-            <button onclick="rlggEncode()">加密</button>
-            <button onclick="rlggDecode()">解密</button>
-            <button onclick="copyRes()" class="btn-green">一键复制结果</button>
-            <textarea id="rlggOut" readonly placeholder="处理结果将展示在此"></textarea>
-        </div>
-        <div class="card">
-            <h2>🔡 Base64 加解密</h2>
-            <textarea id="b64In" placeholder="输入文本"></textarea>
-            <button onclick="b64Encode()">Base64 加密</button>
-            <button onclick="b64Decode()">Base64 解密</button>
-            <textarea id="b64Out" readonly></textarea>
-        </div>
-        <div class="card">
-            <h2>⏱️ 时间戳转换</h2>
-            <input type="text" id="timeNum" placeholder="输入时间戳 / 标准日期">
-            <button onclick="toTime()">时间戳 → 日期</button>
-            <button onclick="toStamp()">日期 → 时间戳</button>
-            <p id="timeRes"></p>
-        </div>
-        <div class="card">
-            <h2>📝 文本压缩解压</h2>
-            <textarea id="zipIn" placeholder="粘贴长文本"></textarea>
-            <button onclick="textZip()">文本压缩</button>
-            <button onclick="textUnzip()">文本解压</button>
-            <textarea id="zipOut" readonly></textarea>
-        </div>
+        <div class="card"><h2>🔐 RLGG 加解密</h2><textarea id="rlggIn" placeholder="请输入需要处理的内容"></textarea><button onclick="rlggEncode()">加密</button><button onclick="rlggDecode()">解密</button><button onclick="copyRes()" class="btn-green">一键复制结果</button><textarea id="rlggOut" readonly placeholder="处理结果将展示在此"></textarea></div>
+        <div class="card"><h2>🔡 Base64 加解密</h2><textarea id="b64In" placeholder="输入文本"></textarea><button onclick="b64Encode()">Base64 加密</button><button onclick="b64Decode()">Base64 解密</button><textarea id="b64Out" readonly></textarea></div>
+        <div class="card"><h2>⏱️ 时间戳转换</h2><input type="text" id="timeNum" placeholder="输入时间戳 / 标准日期"><button onclick="toTime()">时间戳 → 日期</button><button onclick="toStamp()">日期 → 时间戳</button><p id="timeRes"></p></div>
+        <div class="card"><h2>📝 文本压缩解压</h2><textarea id="zipIn" placeholder="粘贴长文本"></textarea><button onclick="textZip()">文本压缩</button><button onclick="textUnzip()">文本解压</button><textarea id="zipOut" readonly></textarea></div>
     </div>
 
     <!-- 公告 -->
     <div class="page" id="page-notice">
-        <div class="card">
-            <h2>📢 全站公告</h2>
-            <p>1. 全站界面全面升级，采用高级磨砂极简设计风格</p>
-            <p>2. 评论系统支持自主管理，使用更自由</p>
-            <p>3. 等级积分与称号系统正式稳定运行</p>
-            <p>4. 请遵守社区规则，共同维护优质环境</p>
-        </div>
+        <div class="card"><h2>📢 全站公告</h2><p>1. 全站界面全面升级，采用高级磨砂极简设计风格</p><p>2. 评论系统支持自主管理，使用更自由</p><p>3. 等级积分与称号系统正式稳定运行</p><p>4. 请遵守社区规则，共同维护优质环境</p></div>
     </div>
 
     <!-- 评论区 -->
     <div class="page" id="page-comment">
-        <div class="card">
-            <h2>💬 社区评论</h2>
-            <textarea id="commentIn" placeholder="写下你的评论..."></textarea>
-            <button onclick="sendComment()">发布评论</button>
-            <div id="commentList"></div>
-        </div>
+        <div class="card"><h2>💬 社区评论</h2><textarea id="commentIn" placeholder="写下你的评论..."></textarea><button onclick="sendComment()">发布评论</button><div id="commentList"></div></div>
     </div>
 </div>
 
-<!-- 音乐控制 -->
-<div class="music-ctrl">
-    <button onclick="musicToggle()">播放 / 暂停</button>
-</div>
-<audio id="bgMusic" loop preload="auto">
-    <source src="https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_100KB_MP3.mp3">
-
-<!-- 返回顶部 -->
+<div class="music-ctrl"><button onclick="musicToggle()">播放 / 暂停</button></div>
+<audio id="bgMusic" loop preload="auto"><source src="https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_100KB_MP3.mp3">
 <div class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 
 <script>
-// 页面切换
-function switchPage(id){
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
-    document.getElementById('page-'+id).classList.add('show');
-    document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));
-    document.querySelector(`.nav a[data-page="${id}"]`).classList.add('active');
-}
-
-// 加载动画
-window.onload = function(){
-    setTimeout(()=>{
-        document.getElementById('loading').classList.add('hide');
-    },600);
-}
-
-// 返回顶部显示
-window.onscroll = function(){
-    let bt = document.getElementById('backTop');
-    bt.classList.toggle('show',document.documentElement.scrollTop>200);
-}
-
-// 背景音乐
-let musicStatus = true;
-function musicToggle(){
-    let m = document.getElementById('bgMusic');
-    musicStatus ? (m.pause(),musicStatus=false) : (m.play(),musicStatus=true);
-}
-
-// ========== RLGG加密 ==========
-function rlggEncode(){
-    let val = document.getElementById('rlggIn').value;
-    let res = btoa(unescape(encodeURIComponent(val)))+"@rlgg";
-    document.getElementById('rlggOut').value = res;
-}
-function rlggDecode(){
-    let val = document.getElementById('rlggIn').value.replace("@rlgg","");
-    let res = decodeURIComponent(escape(atob(val)));
-    document.getElementById('rlggOut').value = res;
-}
-// 一键复制
-function copyRes(){
-    let out = document.getElementById('rlggOut');
-    out.select();document.execCommand('copy');
-    alert('复制成功');
-}
-
-// ========== Base64 ==========
-function b64Encode(){
-    let v = document.getElementById('b64In').value;
-    document.getElementById('b64Out').value = btoa(unescape(encodeURIComponent(v)));
-}
-function b64Decode(){
-    let v = document.getElementById('b64In').value;
-    document.getElementById('b64Out').value = decodeURIComponent(escape(atob(v)));
-}
-
-// ========== 时间戳 ==========
-function toTime(){
-    let s = document.getElementById('timeNum').value;
-    let t = new Date(Number(s));
-    document.getElementById('timeRes').innerText = t.toLocaleString();
-}
-function toStamp(){
-    let d = new Date(document.getElementById('timeNum').value);
-    document.getElementById('timeRes').innerText = d.getTime();
-}
-
-// ========== 简易文本压缩 ==========
-function textZip(){
-    let s = document.getElementById('zipIn').value;
-    document.getElementById('zipOut').value = btoa(s);
-}
-function textUnzip(){
-    let s = document.getElementById('zipIn').value;
-    document.getElementById('zipOut').value = atob(s);
-}
-
-// ========== 个人中心 & 等级积分 ==========
-let userData = JSON.parse(localStorage.getItem('userData'))||{
-    name:"游客",lv:1,score:0,login:0,online:0,title:"普通访客"
-};
+function switchPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));document.getElementById('page-'+id).classList.add('show');document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));document.querySelector(`.nav a[data-page="${id}"]`).classList.add('active');}
+window.onload = function(){setTimeout(()=>{document.getElementById('loading').classList.add('hide');},600);}
+window.onscroll = function(){let bt = document.getElementById('backTop');bt.classList.toggle('show',document.documentElement.scrollTop>200);}
+let musicStatus = true;function musicToggle(){let m = document.getElementById('bgMusic');musicStatus ? (m.pause(),musicStatus=false) : (m.play(),musicStatus=true);}
+function rlggEncode(){let val=document.getElementById('rlggIn').value;let res=btoa(unescape(encodeURIComponent(val)))+"@rlgg";document.getElementById('rlggOut').value=res;}
+function rlggDecode(){let val=document.getElementById('rlggIn').value.replace("@rlgg","");let res=decodeURIComponent(escape(atob(val)));document.getElementById('rlggOut').value=res;}
+function copyRes(){let out=document.getElementById('rlggOut');out.select();document.execCommand('copy');alert('复制成功');}
+function b64Encode(){let v=document.getElementById('b64In').value;document.getElementById('b64Out').value=btoa(unescape(encodeURIComponent(v)));}
+function b64Decode(){let v=document.getElementById('b64In').value;document.getElementById('b64Out').value=decodeURIComponent(escape(atob(v)));}
+function toTime(){let s=document.getElementById('timeNum').value;let t=new Date(Number(s));document.getElementById('timeRes').innerText=t.toLocaleString();}
+function toStamp(){let d=new Date(document.getElementById('timeNum').value);document.getElementById('timeRes').innerText=d.getTime();}
+function textZip(){let s=document.getElementById('zipIn').value;document.getElementById('zipOut').value=btoa(s);}
+function textUnzip(){let s=document.getElementById('zipIn').value;document.getElementById('zipOut').value=atob(s);}
+let userData=JSON.parse(localStorage.getItem('userData'))||{name:"游客",lv:1,score:0,login:0,online:0,title:"普通访客"};
 function saveUser(){localStorage.setItem('userData',JSON.stringify(userData));}
-function upUserView(){
-    document.getElementById('userName').innerText=userData.name;
-    document.getElementById('userLv').innerText=userData.lv;
-    document.getElementById('userScore').innerText=userData.score;
-    document.getElementById('loginDay').innerText=userData.login;
-    document.getElementById('onlineDay').innerText=userData.online;
-    document.getElementById('userTitle').innerText=userData.title;
-    let need = userData.lv * 100;
-    document.getElementById('needScore').innerText = need;
-    let per = (userData.score / need)*100;
-    document.getElementById('lvProgress').style.width = per+"%";
-}
-// 重置数据
-function resetUserData(){
-    if(confirm('确定清空所有个人数据？不可恢复！')){
-        localStorage.removeItem('userData');
-        location.reload();
-    }
-}
-// 积分兑换称号
-function buyTitle(type,cost){
-    if(userData.score >= cost){
-        userData.score -= cost;
-        if(type===1)userData.title="活跃用户";
-        if(type===2)userData.title="资深成员";
-        if(type===3)userData.title="元老用户";
-        saveUser();upUserView();
-        alert('兑换成功');
-    }else{
-        alert('积分不足');
-    }
-}
+function upUserView(){document.getElementById('userName').innerText=userData.name;document.getElementById('userLv').innerText=userData.lv;document.getElementById('userScore').innerText=userData.score;document.getElementById('loginDay').innerText=userData.login;document.getElementById('onlineDay').innerText=userData.online;document.getElementById('userTitle').innerText=userData.title;let need=userData.lv*100;document.getElementById('needScore').innerText=need;let per=(userData.score/need)*100;document.getElementById('lvProgress').style.width=per+"%";}
+function resetUserData(){if(confirm('确定清空所有个人数据？不可恢复！')){localStorage.removeItem('userData');location.reload();}}
+function buyTitle(type,cost){if(userData.score>=cost){userData.score-=cost;if(type===1)userData.title="活跃用户";if(type===2)userData.title="资深成员";if(type===3)userData.title="元老用户";saveUser();upUserView();alert('兑换成功');}else{alert('积分不足');}}
 upUserView();
-
-// ========== 评论系统 ==========
-let commentList = JSON.parse(localStorage.getItem('commentList'))||[];
-function renderComment(){
-    let html = "";
-    commentList.forEach((item,idx)=>{
-        html += `<div class="comment-item">
-            <p>${item.nick}：${item.txt}</p>
-            <button class="btn-red" onclick="delComment(${idx})">删除</button>
-        </div>`;
-    });
-    document.getElementById('commentList').innerHTML = html;
-}
-function sendComment(){
-    let txt = document.getElementById('commentIn').value.trim();
-    if(!txt)return alert('内容不能为空');
-    commentList.push({nick:userData.name,txt:txt});
-    localStorage.setItem('commentList',JSON.stringify(commentList));
-    renderComment();
-    document.getElementById('commentIn').value="";
-}
-function delComment(i){
-    commentList.splice(i,1);
-    localStorage.setItem('commentList',JSON.stringify(commentList));
-    renderComment();
-}
+let commentList=JSON.parse(localStorage.getItem('commentList'))||[];
+function renderComment(){let html="";commentList.forEach((item,idx)=>{html+=`<div class="comment-item"><p>${item.nick}：${item.txt}</p><button class="btn-red" onclick="delComment(${idx})">删除</button></div>`;});document.getElementById('commentList').innerHTML=html;}
+function sendComment(){let txt=document.getElementById('commentIn').value.trim();if(!txt)return alert('内容不能为空');commentList.push({nick:userData.name,txt:txt});localStorage.setItem('commentList',JSON.stringify(commentList));renderComment();document.getElementById('commentIn').value="";}
+function delComment(i){commentList.splice(i,1);localStorage.setItem('commentList',JSON.stringify(commentList));renderComment();}
 renderComment();
 </script>
 </body>
