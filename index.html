@@ -14,7 +14,7 @@
         }
         .light-mode{
             --bg: #f0f4f8;
-            --card: rgba255,255,255,0.85);
+            --card: rgba(255,255,255,0.85);
             --text: #111;
             --border: #ccc;
         }
@@ -149,7 +149,6 @@
             color:#888;
         }
     </style>
-    <script src="https://count.getloli.com/get/@dnserver"></script>
 </head>
 <body>
 <!-- 灵动岛 音乐 -->
@@ -173,11 +172,11 @@
     </div>
     <div class="data-item">
         <p>总访问量</p>
-        <span><img src="https://count.getloli.com/@dnserver" style="height:20px;"></span>
+        <span id="countNum">0</span>
     </div>
 </div>
 
-<!-- 公告栏 仅管理员可编辑 -->
+<!-- 公告栏（全员可见，管理员可改） -->
 <div class="notice-box">
     <div class="notice-title">
         <span>📢 服务器公告</span>
@@ -197,14 +196,18 @@
 </div>
 
 <script>
+// 在这里写固定公告，所有人都能看到
+const defaultNotice = "欢迎进入DN服务器！\n服务器稳定运行中，禁止违规内容。";
+
+// 双管理员密码
+const adminPwdList = ["cyz201105", "dndnttt"];
+let isEditOpen = false;
+
 const themeBtn = document.getElementById('themeBtn');
 themeBtn.addEventListener('click', ()=>{
     document.body.classList.toggle('light-mode');
     themeBtn.innerText = document.body.classList.contains('light-mode')?'深色':'浅色';
 });
-
-// 双管理员密码
-const adminPwdList = ["cyz201105", "dndnttt"];
 
 // 登录跳转
 function checkPwd(){
@@ -218,37 +221,33 @@ function checkPwd(){
     }
 }
 
-// 解锁公告编辑（双密码通用）
+// 解锁编辑
 function unlockEdit(){
     let key = prompt("请输入管理员密码：");
     if(adminPwdList.includes(key)){
         isEditOpen = true;
         document.getElementById('noticeContent').classList.add("edit-on");
-        document.getElementById('editTip').innerText = "✅ 已解锁，可自由修改公告（自动保存）";
+        document.getElementById('editTip').innerText = "✅ 已解锁，修改后直接保存到网页";
     }else{
         alert("密码错误，无法编辑");
     }
 }
 
-let isEditOpen = false;
-// 公告本地存储
+// 公告逻辑：写死在网页里，所有人可见
 const notice = document.getElementById('noticeContent');
-notice.value = localStorage.getItem('dnNotice') || '';
-notice.addEventListener('input', ()=>{
-    if(isEditOpen){
-        localStorage.setItem('dnNotice', notice.value);
-    }
-});
+// 默认公告
+notice.value = defaultNotice;
+
+// 清空公告
 function clearNotice(){
     if(!isEditOpen){
         alert("请先解锁编辑权限");
         return;
     }
-    notice.value = '';
-    localStorage.removeItem('dnNotice');
+    notice.value = "";
 }
 
-// 模拟真实在线人数
+// 模拟在线人数
 function randomOnline(){
     let base = 3;
     let random = Math.floor(Math.random() * 8);
