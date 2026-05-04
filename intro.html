@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DN工作室</title>
+    <title>DN工作室综合站点</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter","Microsoft Yahei",sans-serif;}
         :root{
@@ -18,11 +18,17 @@
             --danger:#ef4444;
         }
         body{
-            background:var(--bg-main);
+            background: linear-gradient(-45deg,#080c14,#1a102f,#20173b,#121a2b);
+            background-size: 400% 400%;
+            animation: bgFlow 15s ease infinite;
             color:var(--text-primary);
             min-height:100vh;
             padding-bottom:80px;
-            background-attachment:fixed;
+        }
+        @keyframes bgFlow{
+            0%{background-position:0% 50%;}
+            50%{background-position:100% 50%;}
+            100%{background-position:0% 50%;}
         }
         .loading{
             position:fixed;top:0;left:0;width:100%;height:100%;
@@ -77,7 +83,6 @@
         .btn-green{background:var(--success);}
         .btn-green:hover{background:#34d399;}
 
-        /* DN下载按钮 高级渐变 */
         .btn-dn{
             background:linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899);
             color:#fff;border:none;padding:14px 26px;border-radius:12px;
@@ -134,36 +139,34 @@
 </div>
 
 <div class="container">
-    <!-- 首页 -->
     <div class="page show" id="page-home">
         <div class="card">
-            <h2>🎉 欢迎来到 DN 工作室,专注网络计算机技术深耕 ,聚焦游
-戏安全,服务器运维与漏洞挖掘领域的技术团
-队o</h2>
-            <p>团队深耕网络底层原理, 游戏逆向分析, 服务
-器架构攻防等核心方向 ,长期专注游戏漏洞挖
-掘 程序缺陷检测 服务器安全巡检 网络风
-险排查等业务. 依托扎实的代码功底, 逆向技
-术与网络渗透能力 ,深度剖析游戏客户端与服
-务端底层逻辑 , 精准寻找隐藏漏洞, 数据缺
-陷 权限漏洞及服务器运行隐患.</p>
+            <h2>🎉 欢迎来到 DN 综合站点</h2>
+            <p>本站为极简高级风多功能工具站，全部数据本地离线储存，轻量化无广告，沉浸式使用体验。</p>
             <p>如需了解全站功能、系统规则与工具详情，可前往「介绍」页面查看完整说明。</p>
         </div>
 
-        <!-- ✅ DN游戏辅助 高级下载卡片 -->
         <div class="card" style="border:1px solid rgba(99,102,241,0.2);">
             <h2 style="background:linear-gradient(135deg,#6366f1,#ec4899);-webkit-background-clip:text;color:transparent;">🎮 DN游戏辅助 · 官方下载</h2>
             <p>稳定兼容 · 安全无捆绑 · 一键启动 · 持续更新维护</p>
             <p style="color:#cbd5e1;font-size:14px;">适配安卓系统，点击下方按钮直接下载</p>
-            <a href="https://mpimg.cn/down.php/d52790ee6f479ffd5b5858025b93002c.apk" target="_blank" style="text-decoration:none;">
+            <p style="color:#818cf8;">📥 累计下载次数：<span id="downCount">0</span> 次</p>
+            <a href="https://mpimg.cn/down.php/d52790ee6f479ffd5b5858025b93002c.apk" target="_blank" onclick="addDownCount()">
                 <button class="btn-dn">⚡ 立即下载 DN游戏辅助</button>
             </a>
         </div>
     </div>
 
-    <!-- 介绍页 -->
     <div class="page" id="page-intro">
-        <div class="card"><h2>📖 站点概述</h2><p>我们专注技术探索 ,主玫各类网游, 单机游戏
+        <div class="card"><h2>📖 站点概述</h2><p>DN工作室团队深耕网络底层原理, 游戏逆向分析, 服务
+器架构攻防等核心方向 ,长期专注游戏漏洞挖
+掘 程序缺陷检测 服务器安全巡检 网络风
+险排查等业务. 依托扎实的代码功底, 逆向技
+术与网络渗透能力 ,深度剖析游戏客户端与服
+务端底层逻辑 , 精准寻找隐藏漏洞, 数据缺
+陷 权限漏洞及服务器运行隐患.DN工作室 ,专注网络计算机技术深耕 ,聚焦游
+戏安全,服务器运维与漏洞挖掘领域的技术团
+队o我们专注技术探索 ,主玫各类网游, 单机游戏
 漏洞检测 , 独立/云端服务器安全加固 漏洞修
 复 防御优化 ,同时承接网络环境检测, 程序
 安全测试, BUG排查等技术服务. 以严谨的技
@@ -172,13 +175,12 @@
 立足计算机网络前沿,专注玫防技术研究 ,以
 技术为核心,以专业为基石 ,持续深耕游戏安
 全与服务器运维领域 ,致力成为高质量的网络
-技术政坚工作室.</p></div>
-        <div class="card"><h2>✅ 核心功能一览</h2><p>• 全局体验：渐变加载动画、磨砂导航、悬浮按钮、平滑滚动</p><p>• 实用工具：RLGG 加解密、Base64 转换、时间戳换算、文本压缩</p><p>• 成长系统：等级积分、可视化升级进度、在线统计、专属称号商城</p><p>• 社区互动：实时评论发布、自主删评、整洁社区管理</p><p>• 便捷功能：结果一键复制、背景音乐控制、一键返回顶部</p></div>
-        <div class="card"><h2>📌 系统规则</h2><p>• 等级体系：逐级积分晋升，进度条直观展示升级进度</p><p>• 积分商城：消耗积分解锁专属标识，个性化展示</p><p>• 本地存储：所有用户数据本地留存，刷新不丢失</p><p>• 社区规范：文明发言，共同维护整洁使用环境</p></div>
+技术政坚工作室.集成实用工具、个人成长体系、社区评论、公告资讯于一体，采用现代磨砂设计，视觉简洁高级，操作流畅舒适。</p></div>
+        <div class="card"><h2>✅ 核心功能一览</h2><p>• 全局体验：渐变流动霓虹背景、磨砂导航、悬浮按钮、平滑滚动</p><p>• 实用工具：RLGG 加解密、Base64 转换、时间戳换算、文本压缩</p><p>• 成长系统：等级积分、每日签到、可视化升级进度、在线统计、专属称号商城</p><p>• 社区互动：实时评论发布、自主删评、整洁社区管理</p><p>• 便捷功能：结果一键复制、背景音乐控制、一键返回顶部</p></div>
+        <div class="card"><h2>📌 系统规则</h2><p>• 等级体系：逐级积分晋升，进度条直观展示升级进度</p><p>• 积分商城：消耗积分解锁专属标识，个性化展示</p><p>• 本地存储：所有用户数据本地留存，刷新不丢失</p><p>• 社区规范：文明发言，共同维护优质环境</p></div>
         <div class="card"><h2>🧰 工具简述</h2><p>• RLGG 加密：定制轻量化加密方案，快速加解密+一键复制</p><p>• Base64：通用编码转换，满足日常文本处理需求</p><p>• 时间戳：标准时间与毫秒时间戳双向快速转换</p><p>• 文本压缩：精简长文本体积，便于传输与储存</p></div>
     </div>
 
-    <!-- 个人中心 -->
     <div class="page" id="page-user">
         <div class="card">
             <h2>👤 个人等级中心</h2>
@@ -190,12 +192,12 @@
             <p>连续登录天数：<span id="loginDay">0</span> 天</p>
             <p>累计在线天数：<span id="onlineDay">0</span> 天</p>
             <p>专属称号：<span id="userTitle">普通访客</span></p>
+            <button onclick="signIn()" class="btn-green" id="signBtn">📅 每日签到 +20积分</button>
             <button onclick="resetUserData()" class="btn-red">一键清空个人数据</button>
         </div>
         <div class="card"><h2>🎁 积分商城</h2><button onclick="buyTitle(1,200)">兑换【活跃用户】(200积分)</button><button onclick="buyTitle(2,500)">兑换【资深成员】(500积分)</button><button onclick="buyTitle(3,1000)">兑换【元老用户】(1000积分)</button></div>
     </div>
 
-    <!-- 工具合集 -->
     <div class="page" id="page-tool">
         <div class="card"><h2>🔐 RLGG 加解密</h2><textarea id="rlggIn" placeholder="请输入需要处理的内容"></textarea><button onclick="rlggEncode()">加密</button><button onclick="rlggDecode()">解密</button><button onclick="copyRes()" class="btn-green">一键复制结果</button><textarea id="rlggOut" readonly placeholder="处理结果将展示在此"></textarea></div>
         <div class="card"><h2>🔡 Base64 加解密</h2><textarea id="b64In" placeholder="输入文本"></textarea><button onclick="b64Encode()">Base64 加密</button><button onclick="b64Decode()">Base64 解密</button><textarea id="b64Out" readonly></textarea></div>
@@ -203,26 +205,55 @@
         <div class="card"><h2>📝 文本压缩解压</h2><textarea id="zipIn" placeholder="粘贴长文本"></textarea><button onclick="textZip()">文本压缩</button><button onclick="textUnzip()">文本解压</button><textarea id="zipOut" readonly></textarea></div>
     </div>
 
-    <!-- 公告 -->
     <div class="page" id="page-notice">
-        <div class="card"><h2>📢 全站公告</h2><p>1. 全站界面全面升级，采用高级磨砂极简设计风格</p><p>2. 评论系统支持自主管理，使用更自由</p><p>3. 等级积分与称号系统正式稳定运行</p><p>4. 请遵守社区规则，共同维护优质环境</p></div>
+        <div class="card"><h2>📢 全站公告</h2><p>1. 全站界面全面升级，新增霓虹流动渐变背景</p><p>2. 新增每日签到领积分、软件下载次数统计</p><p>3. 评论系统支持自主管理，使用更自由</p><p>4. 等级积分与称号系统正式稳定运行</p><p>5. 请遵守社区规则，共同维护优质环境</p></div>
     </div>
 
-    <!-- 评论区 -->
     <div class="page" id="page-comment">
         <div class="card"><h2>💬 社区评论</h2><textarea id="commentIn" placeholder="写下你的评论..."></textarea><button onclick="sendComment()">发布评论</button><div id="commentList"></div></div>
     </div>
 </div>
 
-<div class="music-ctrl"><button onclick="musicToggle()">播放 / 暂停</button></div>
-<audio id="bgMusic" loop preload="auto"><source src="https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_100KB_MP3.mp3">
+<!-- 音乐：心似烟火 - 陈壹千 -->
+<div class="music-ctrl">
+    <button onclick="musicToggle()">🎵 心似烟火 - 播放/暂停</button>
+</div>
+<audio id="bgMusic" loop preload="auto">
+    <source src="https://music.163.com/song/media/outer/url?id=1399112638.mp3" type="audio/mpeg">
+
+
 <div class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 
 <script>
 function switchPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));document.getElementById('page-'+id).classList.add('show');document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));document.querySelector(`.nav a[data-page="${id}"]`).classList.add('active');}
-window.onload = function(){setTimeout(()=>{document.getElementById('loading').classList.add('hide');},600);}
+window.onload = function(){
+    setTimeout(()=>{document.getElementById('loading').classList.add('hide');},600);
+    let downNum = localStorage.getItem('dnDownCount')||0;
+    document.getElementById('downCount').innerText = downNum;
+    checkSignStatus();
+    bgMusic.volume = 0.3;
+}
+function addDownCount(){
+    let num = Number(localStorage.getItem('dnDownCount')||0);
+    num++;
+    localStorage.setItem('dnDownCount',num);
+    document.getElementById('downCount').innerText = num;
+}
+
 window.onscroll = function(){let bt = document.getElementById('backTop');bt.classList.toggle('show',document.documentElement.scrollTop>200);}
-let musicStatus = true;function musicToggle(){let m = document.getElementById('bgMusic');musicStatus ? (m.pause(),musicStatus=false) : (m.play(),musicStatus=true);}
+let bgMusic = document.getElementById('bgMusic');
+let musicStatus = false;
+
+function musicToggle(){
+    if(!musicStatus){
+        bgMusic.play();
+        musicStatus = true;
+    }else{
+        bgMusic.pause();
+        musicStatus = false;
+    }
+}
+
 function rlggEncode(){let val=document.getElementById('rlggIn').value;let res=btoa(unescape(encodeURIComponent(val)))+"@rlgg";document.getElementById('rlggOut').value=res;}
 function rlggDecode(){let val=document.getElementById('rlggIn').value.replace("@rlgg","");let res=decodeURIComponent(escape(atob(val)));document.getElementById('rlggOut').value=res;}
 function copyRes(){let out=document.getElementById('rlggOut');out.select();document.execCommand('copy');alert('复制成功');}
@@ -232,12 +263,55 @@ function toTime(){let s=document.getElementById('timeNum').value;let t=new Date(
 function toStamp(){let d=new Date(document.getElementById('timeNum').value);document.getElementById('timeRes').innerText=d.getTime();}
 function textZip(){let s=document.getElementById('zipIn').value;document.getElementById('zipOut').value=btoa(s);}
 function textUnzip(){let s=document.getElementById('zipIn').value;document.getElementById('zipOut').value=atob(s);}
-let userData=JSON.parse(localStorage.getItem('userData'))||{name:"游客",lv:1,score:0,login:0,online:0,title:"普通访客"};
+
+let userData=JSON.parse(localStorage.getItem('userData'))||{
+    name:"游客",lv:1,score:0,login:0,online:0,title:"普通访客",
+    lastSign:""
+};
 function saveUser(){localStorage.setItem('userData',JSON.stringify(userData));}
-function upUserView(){document.getElementById('userName').innerText=userData.name;document.getElementById('userLv').innerText=userData.lv;document.getElementById('userScore').innerText=userData.score;document.getElementById('loginDay').innerText=userData.login;document.getElementById('onlineDay').innerText=userData.online;document.getElementById('userTitle').innerText=userData.title;let need=userData.lv*100;document.getElementById('needScore').innerText=need;let per=(userData.score/need)*100;document.getElementById('lvProgress').style.width=per+"%";}
+function upUserView(){
+    document.getElementById('userName').innerText=userData.name;
+    document.getElementById('userLv').innerText=userData.lv;
+    document.getElementById('userScore').innerText=userData.score;
+    document.getElementById('loginDay').innerText=userData.login;
+    document.getElementById('onlineDay').innerText=userData.online;
+    document.getElementById('userTitle').innerText=userData.title;
+    let need=userData.lv*100;
+    document.getElementById('needScore').innerText=need;
+    let per=(userData.score/need)*100;
+    document.getElementById('lvProgress').style.width=per+"%";
+}
+function getTodayStr(){
+    let d = new Date();
+    return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+}
+function checkSignStatus(){
+    let btn = document.getElementById('signBtn');
+    if(userData.lastSign === getTodayStr()){
+        btn.innerText = "✅ 今日已签到";
+        btn.disabled = true;
+        btn.style.opacity = "0.6";
+    }
+}
+function signIn(){
+    let today = getTodayStr();
+    if(userData.lastSign === today){
+        alert("今日已经签到过了，明天再来！");
+        return;
+    }
+    userData.score += 20;
+    userData.lastSign = today;
+    userData.login += 1;
+    saveUser();
+    upUserView();
+    checkSignStatus();
+    alert("签到成功！获得20积分");
+}
+
 function resetUserData(){if(confirm('确定清空所有个人数据？不可恢复！')){localStorage.removeItem('userData');location.reload();}}
 function buyTitle(type,cost){if(userData.score>=cost){userData.score-=cost;if(type===1)userData.title="活跃用户";if(type===2)userData.title="资深成员";if(type===3)userData.title="元老用户";saveUser();upUserView();alert('兑换成功');}else{alert('积分不足');}}
 upUserView();
+
 let commentList=JSON.parse(localStorage.getItem('commentList'))||[];
 function renderComment(){let html="";commentList.forEach((item,idx)=>{html+=`<div class="comment-item"><p>${item.nick}：${item.txt}</p><button class="btn-red" onclick="delComment(${idx})">删除</button></div>`;});document.getElementById('commentList').innerHTML=html;}
 function sendComment(){let txt=document.getElementById('commentIn').value.trim();if(!txt)return alert('内容不能为空');commentList.push({nick:userData.name,txt:txt});localStorage.setItem('commentList',JSON.stringify(commentList));renderComment();document.getElementById('commentIn').value="";}
