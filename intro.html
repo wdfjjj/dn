@@ -145,10 +145,6 @@
         }
         .info-text{color:var(--accent-hover);margin:8px 0;}
         .quote-box{padding:12px;border-radius:10px;background:rgba(59,130,246,0.08);margin:12px 0;}
-
-        /* 备忘录、倒计时条目样式 */
-        .note-item,.cd-item{padding:12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
-        .color-preview{width:100%;height:80px;border-radius:10px;margin:10px 0;border:1px solid var(--border);}
     </style>
 </head>
 <body>
@@ -193,7 +189,7 @@
 
     <div class="page" id="page-intro">
         <div class="card"><h2>📖 站点概述</h2><p>DN工作室团队深耕网络底层原理, 游戏逆向分析, 服务器架构攻防等核心方向 ,长期专注游戏漏洞挖掘 程序缺陷检测 服务器安全巡检 网络风险排查等业务. 依托扎实的代码功底, 逆向技术与网络渗透能力 ,深度剖析游戏客户端与服务端底层逻辑 , 精准寻找隐藏漏洞, 数据缺陷 权限漏洞及服务器运行隐患.DN工作室 ,专注网络计算机技术深耕 ,聚焦游戏安全,服务器运维与漏洞挖掘领域的技术团队。</p></div>
-        <div class="card"><h2>✅ 核心功能一览</h2><p>• 全局体验：渐变流动霓虹背景、磨砂导航、悬浮按钮、平滑滚动</p><p>• 实用工具：RLGG 加解密、Base64 转换、时间戳换算、文本压缩</p><p>• 成长系统：等级积分、每日签到、可视化升级进度、专属称号</p><p>• 新增功能：主题切换、在线计时、访问统计、随机语录、密码生成、备忘录、倒计时、IP查询、色彩拾取器</p></div>
+        <div class="card"><h2>✅ 核心功能一览</h2><p>• 全局体验：渐变流动霓虹背景、磨砂导航、悬浮按钮、平滑滚动</p><p>• 实用工具：RLGG 加解密、Base64 转换、时间戳换算、文本压缩</p><p>• 成长系统：等级积分、每日签到、可视化升级进度、专属称号</p><p>• 新增功能：主题切换、在线计时、访问统计、随机语录、密码生成</p></div>
     </div>
 
     <div class="page" id="page-user">
@@ -238,36 +234,6 @@
         <input id="pwdRes" readonly>
         <p id="pwdLevel"></p>
         </div>
-
-        <!-- 新增：备忘录 -->
-        <div class="card"><h2>📒 备忘录（本地保存）</h2>
-            <textarea id="noteIn" placeholder="输入备忘录内容"></textarea>
-            <button onclick="addNote()" class="btn-green">添加备忘录</button>
-            <div id="noteList"></div>
-        </div>
-
-        <!-- 新增：倒计时 -->
-        <div class="card"><h2>⏳ 倒计时（本地保存）</h2>
-            <input type="text" id="cdTitle" placeholder="倒计时名称（如：考试）">
-            <input type="datetime-local" id="cdTime">
-            <button onclick="addCountdown()" class="btn-green">添加倒计时</button>
-            <div id="cdList"></div>
-        </div>
-
-        <!-- 新增：IP查询 -->
-        <div class="card"><h2>🌐 IP查询（公网IP）</h2>
-            <button onclick="getIpInfo()" class="btn-green">获取我的IP信息</button>
-            <p id="ipRes"></p>
-        </div>
-
-        <!-- 新增：色彩拾取器 -->
-        <div class="card"><h2>🎨 色彩拾取器</h2>
-            <input type="color" id="colorPicker" value="#3b82f6" onchange="setPreview()">
-            <div class="color-preview" id="colorPreview"></div>
-            <p>色值：<span id="colorHex">#3b82f6</span></p>
-            <button onclick="copyColor()" class="btn-green">复制色值</button>
-        </div>
-
     </div>
 
     <div class="page" id="page-notice">
@@ -275,9 +241,8 @@
         <p>1. 全站全面升级，新增海量实用功能</p>
         <p>2. 自动播放背景音乐：海屿你 - 马也_Crabbit</p>
         <p>3. 新增主题切换、在线计时、访问统计</p>
-        <p>4. 新增备忘录、倒计时、IP查询、色彩拾取器</p>
-        <p>5. 工具持续扩充，免费永久使用</p>
-        <p>6. 文明交流，共建优质社区环境</p>
+        <p>4. 工具持续扩充，免费永久使用</p>
+        <p>5. 文明交流，共建优质社区环境</p>
         </div>
     </div>
 
@@ -295,7 +260,6 @@
 </div>
 <audio id="bgMusic" loop autoplay preload="auto">
     <source src="https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_100KB_MP3.mp3" type="audio/mpeg">
-
 
 <div class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 
@@ -363,11 +327,6 @@ window.onload = function(){
     document.getElementById('downCount').innerText = downNum;
     checkSignStatus();
     bgMusic.volume = 0.25;
-
-    // 备忘录、倒计时初始化渲染
-    renderNotes();
-    renderCountdowns();
-    setPreview();
 }
 function addDownCount(){
     let num = Number(localStorage.getItem('dnDownCount')||0);
@@ -458,94 +417,6 @@ function renderComment(){let html="";commentList.forEach((item,idx)=>{html+=`<di
 function sendComment(){let txt=document.getElementById('commentIn').value.trim();if(!txt)return alert('内容不能为空');commentList.push({nick:userData.name,txt:txt});localStorage.setItem('commentList',JSON.stringify(commentList));renderComment();document.getElementById('commentIn').value="";}
 function delComment(i){commentList.splice(i,1);localStorage.setItem('commentList',JSON.stringify(commentList));renderComment();}
 renderComment();
-
-// ========== 备忘录（本地存储） ==========
-let noteList = JSON.parse(localStorage.getItem('dnNotes')||[]);
-function renderNotes(){
-    let html = "";
-    noteList.forEach((note,idx)=>{
-        html += `<div class="note-item"><span>${note.txt}</span><button class="btn-red" onclick="delNote(${idx})">删除</button></div>`;
-    });
-    document.getElementById('noteList').innerHTML = html;
-}
-function addNote(){
-    let txt = document.getElementById('noteIn').value.trim();
-    if(!txt) return alert('备忘录内容不能为空');
-    noteList.push({txt});
-    localStorage.setItem('dnNotes',JSON.stringify(noteList));
-    renderNotes();
-    document.getElementById('noteIn').value = "";
-}
-function delNote(i){
-    noteList.splice(i,1);
-    localStorage.setItem('dnNotes',JSON.stringify(noteList));
-    renderNotes();
-}
-
-// ========== 倒计时（本地存储） ==========
-let countdownList = JSON.parse(localStorage.getItem('dnCountdowns')||[]);
-function renderCountdowns(){
-    let html = "";
-    countdownList.forEach((cd,idx)=>{
-        let now = new Date().getTime();
-        let end = new Date(cd.time).getTime();
-        let diff = end - now;
-        if(diff <= 0){
-            html += `<div class="cd-item"><span>${cd.title}：已结束</span><button class="btn-red" onclick="delCountdown(${idx})">删除</button></div>`;
-            return;
-        }
-        let d = Math.floor(diff/(1000*60*60*24));
-        let h = String(Math.floor(diff/(1000*60*60)%24)).padStart(2,'0');
-        let m = String(Math.floor(diff/(1000*60)%60)).padStart(2,'0');
-        let s = String(Math.floor(diff/1000%60)).padStart(2,'0');
-        html += `<div class="cd-item"><span>${cd.title}：${d}天 ${h}时 ${m}分 ${s}秒</span><button class="btn-red" onclick="delCountdown(${idx})">删除</button></div>`;
-    });
-    document.getElementById('cdList').innerHTML = html;
-}
-// 每秒刷新倒计时
-setInterval(renderCountdowns,1000);
-
-function addCountdown(){
-    let title = document.getElementById('cdTitle').value.trim();
-    let time = document.getElementById('cdTime').value;
-    if(!title || !time) return alert('请填写完整信息');
-    countdownList.push({title,time});
-    localStorage.setItem('dnCountdowns',JSON.stringify(countdownList));
-    renderCountdowns();
-    document.getElementById('cdTitle').value = "";
-    document.getElementById('cdTime').value = "";
-}
-function delCountdown(i){
-    countdownList.splice(i,1);
-    localStorage.setItem('dnCountdowns',JSON.stringify(countdownList));
-    renderCountdowns();
-}
-
-// ========== IP查询（公网IP） ==========
-function getIpInfo(){
-    fetch('https://api.ipify.org?format=json')
-    .then(res=>res.json())
-    .then(data=>{
-        document.getElementById('ipRes').innerText = `你的公网IP：${data.ip}`;
-    })
-    .catch(()=>{
-        document.getElementById('ipRes').innerText = '获取失败，请稍后重试';
-    });
-}
-
-// ========== 色彩拾取器 ==========
-function setPreview(){
-    let color = document.getElementById('colorPicker').value;
-    document.getElementById('colorPreview').style.background = color;
-    document.getElementById('colorHex').innerText = color;
-}
-function copyColor(){
-    let color = document.getElementById('colorHex').innerText;
-    navigator.clipboard.writeText(color).then(()=>{
-        alert('色值复制成功：'+color);
-    });
-}
 </script>
-
 </body>
 </html>
