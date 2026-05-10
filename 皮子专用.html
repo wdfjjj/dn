@@ -1,0 +1,772 @@
+
+<!DOCTYPE html>
+作者快手ID:1503190226
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DN开户工具3.0 - 由DN工作室隆重推出</title>
+  <style>
+    :root {
+      --primary-color: #ff3366;
+      --primary-light: #ff6699;
+      --primary-dark: #cc0044;
+      --secondary-color: #ff9800;
+      --text-primary: #ff3366;
+      --text-secondary: #ff6699;
+      --background: #000000;
+      --surface: #1a1a1a;
+      --error: #ff3366;
+      --success: #ff3366;
+      --border-radius: 12px;
+      --shadow: 0 4px 12px rgba(255, 51, 102, 0.2);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 25px;
+      margin-bottom: 25px;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 51, 102, 0.3);
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 16px rgba(255, 51, 102, 0.3);
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .auth-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1;
+      border-radius: var(--border-radius);
+      z-index: 1;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: white;
+      box-shadow: var(--shadow);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      color: var(--text-primary);
+      font-size: 24px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .input-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 14px;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid rgba(255, 51, 102, 0.5);
+      border-radius: var(--border-radius);
+      font-size: 16px;
+      transition: var(--transition);
+      background: rgba(0, 0, 0, 0.5);
+      color: var(--text-primary);
+    }
+
+    .input-field:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.1);
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 8px rgba(255, 51, 102, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(255, 51, 102, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .link-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .text-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .text-link:hover {
+      color: var(--primary-light);
+      text-decoration: underline;
+    }
+
+    .main-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 51, 102, 0.3);
+    }
+
+    .avatar {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      margin-right: 15px;
+    }
+
+    .user-info h2 {
+      color: var(--text-primary);
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .user-info p {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+   .function-module {
+      background: var(--surface);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 51, 102, 0.3);
+    }
+
+    .function-module:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(255, 51, 102, 0.3);
+    }
+
+    .module-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .module-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 51, 102, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      color: var(--primary-color);
+      font-size: 18px;
+    }
+
+    .module-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .input-row .input-field {
+      flex: 1;
+    }
+
+    .btn-secondary {
+      padding: 12px 20px;
+      background: var(--surface);
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      border-radius: var(--border-radius);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 51, 102, 0.05);
+    }
+
+    .result-box {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: var(--border-radius);
+      background: rgba(0, 0, 0, 0.5);
+      border-left: 4px solid var(--primary-color);
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre-line;
+      min-height: 80px;
+      transition: var(--transition);
+      color: var(--text-primary);
+    }
+
+    .result-success {
+      border-left-color: var(--success);
+      background: rgba(255, 51, 102, 0.1);
+    }
+
+    .result-error {
+      border-left-color: var(--error);
+      background: rgba(255, 51, 102, 0.1);
+    }
+
+    .bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 15px 0;
+      background: var(--surface);
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      box-shadow: 0 -2px 10px rgba(255, 51, 102, 0.1);
+      z-index: 100;
+      border-top: 1px solid rgba(255, 51, 102, 0.3);
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 12px;
+      transition: var(--transition);
+    }
+
+    .nav-item.active, .nav-item:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-icon {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--primary-color);
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 15px;
+      }
+      
+      .card {
+        padding: 20px;
+      }
+      
+      .input-row {
+        flex-direction: column;
+      }
+      
+      .btn-secondary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 授权验证页面 -->
+  <div class="container">
+    <div class="card" id="authPage">
+      <div class="auth-bg"></div>
+      <div class="auth-header">
+        <div class="logo">仙</div>
+        <h1>仙逆开户工具3.0 - 由仙逆工作室开发</h1>
+        <h1></h1>（由AE科技破解）</h1>
+        <p class="subtitle">仙逆出品 · 必属精品 -空壳 模拟代码-</p>
+      </div>
+      
+      <div class="input-group">
+        <label for="authCode" class="input-label">授权卡密</label>
+        <input type="text" id="authCode" class="input-field" placeholder="请输入您的卡密">
+        <div class="hint-text" style="color: var(--text-secondary); font-size: 12px; margin-top: 5px;">请输入您获取的授权卡密进行验证</div>
+      </div>
+      
+      <button class="btn-primary" onclick="verifyAuth()">验证卡密（随便输）</button>
+      
+      <div class="link-group">
+        <a href="javascript:;" class="text-link" onclick="checkAuthCode()">查询卡密</a>
+        <a href="javascript:;" class="text-link" onclick="showPurchaseModal()">获取卡密</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主界面 -->
+  <div class="container" id="mainPage" style="display: none;">
+    <div class="main-header">
+      <div class="avatar">仙</div>
+      <div class="user-info">
+        <h2>仙逆开户工具 - 不魔怔玩什么互联网-这个程序是虚拟模拟的-请勿上当受骗</h2>
+        <p>仙逆工作室 · 卡密有效期至 2025-12-31 · 购买卡密请添加作者快手—所有功能全部都是假的</p>
+        <p>AE科技破解-修改函数</p>
+      </div>
+    </div>
+
+    <!-- 手机号反查功能 -->
+    <div class="function-module">
+      <div class="module-header">
+        <div class="module-icon">📱</div>
+        <div class="module-title">手机号反查</div>
+      </div>
+      
+      <div class="input-group">
+        <label for="phoneNum" class="input-label">手机号码</label>
+        <input type="text" id="phoneNum" class="input-field" placeholder="请输入11位手机号码" maxlength="11">
+      </div>
+      
+      <div class="input-row">
+        <button class="btn-primary" onclick="checkPhone()">查询</button>
+        <button class="btn-secondary" onclick="clearPhone()">清空</button>
+      </div>
+      
+      <div class="result-box" id="phoneResult">请输入手机号进行查询</div>
+    </div>
+
+    <!-- QQ号查手机号功能 -->
+    <div class="function-module">
+      <div class="module-header">
+        <div class="module-icon">👤</div>
+        <div class="module-title">QQ号查手机号</div>
+      </div>
+      
+      <div class="input-group">
+        <label for="qqNum" class="input-label">QQ号码</label>
+        <input type="text" id="qqNum" class="input-field" placeholder="请输入QQ号码">
+      </div>
+      
+      <div class="input-row">
+        <button class="btn-primary" onclick="checkQq()">查询</button>
+        <button class="btn-secondary" onclick="clearQq()">清空</button>
+      </div>
+      
+      <div class="result-box" id="qqResult">请输入QQ号进行查询</div>
+    </div>
+
+    <!-- 快手反查手机号功能 -->
+    <div class="function-module">
+      <div class="module-header">
+        <div class="module-icon">⚡</div>
+        <div class="module-title">快手反查手机号</div>
+      </div>
+      
+      <div class="input-group">
+        <label for="kuaishouId" class="input-label">快手ID/用户名</label>
+        <input type="text" id="kuaishouId" class="input-field" placeholder="请输入快手ID或用户名">
+      </div>
+      
+      <div class="input-row">
+        <button class="btn-primary" onclick="checkKuaishou()">查询</button>
+        <button class="btn-secondary" onclick="clearKuaishou()">清空</button>
+      </div>
+      
+      <div class="result-box" id="kuaishouResult">请输入快手ID进行查询</div>
+    </div>
+
+    <!-- 微信反查手机号功能 -->
+    <div class="function-module">
+      <div class="module-header">
+        <div class="module-icon">💬</div>
+        <div class="module-title">微信反查手机号</div>
+      </div>
+      
+      <div class="input-group">
+        <label for="wechatId" class="input-label">微信ID/微信号</label>
+        <input type="text" id="wechatId" class="input-field" placeholder="请输入微信ID或微信号">
+      </div>
+      
+      <div class="input-row">
+        <button class="btn-primary" onclick="checkWechat()">查询</button>
+        <button class="btn-secondary" onclick="clearWechat()">清空</button>
+      </div>
+      
+      <div class="result-box" id="wechatResult">请输入微信ID进行查询</div>
+    </div>
+
+    <!-- 照妖镜功能 -->
+    <div class="function-module">
+      <div class="module-header">
+        <div class="module-icon">🔍</div>
+        <div class="module-title">全能版 - 全方位信息查询</div>
+      </div>
+      
+      <div class="input-group">
+        <label for="zhaoyaojingInput" class="input-label">输入任意信息（手机/QQ/微信/身份证）</label>
+        <input type="text" id="zhaoyaojingInput" class="input-field" placeholder="请输入任意信息进行全方位查询">
+      </div>
+      
+      <div class="input-row">
+        <button class="btn-primary" onclick="checkZhaoyaojing()">全面查询</button>
+        <button class="btn-secondary" onclick="clearZhaoyaojing()">清空</button>
+      </div>
+      
+      <div class="result-box" id="zhaoyaojingResult">请输入任意信息进行全方位查询</div>
+    </div>
+  </div>
+
+  <!-- 底部导航 -->
+  <div class="bottom-nav">
+    <a href="javascript:;" class="nav-item active">
+      <span class="nav-icon">🏠</span>
+      <span>首页</span>
+    </a>
+    <a href="javascript:;" class="nav-item">
+      <span class="nav-icon">📊</span>
+      <span>查询记录</span>
+    </a>
+    <a href="javascript:;" class="nav-item">
+      <span class="nav-icon">⚙️</span>
+      <span>设置</span>
+    </a>
+    <a href="javascript:;" class="nav-item">
+      <span class="nav-icon">👤</span>
+      <span>我的</span>
+    </a>
+  </div>
+
+  <script>
+
+    function verifyAuth() {
+      const authCode = document.getElementById('authCode').value;
+      const authButton = event.target;
+      const originalText = authButton.innerHTML;
+      
+      
+      authButton.innerHTML = '<div class="loading"></div>验证中...';
+      authButton.disabled = true;
+      
+      setTimeout(() => {
+if (authCode.trim() !== '') {
+          
+          authButton.innerHTML = '验证成功！';
+          authButton.style.background = 'linear-gradient(135deg, var(--success) 0%, var(--primary-dark) 100%)';
+          
+          setTimeout(() => {
+            document.getElementById('authPage').style.display = 'none';
+            document.getElementById('mainPage').style.display = 'block';
+          }, 800);
+        } else {
+          // 错误反馈
+          authButton.innerHTML = '验证失败，请重试';
+          authButton.style.background = 'linear-gradient(135deg, var(--error) 0%, #cc0044 100%)';
+          
+          setTimeout(() => {
+            authButton.innerHTML = originalText;
+            authButton.style.background = '';
+            authButton.disabled = false;
+          }, 1500);
+        }
+      }, 1000);
+    }
+
+    // 手机号反查功能
+    function checkPhone() {
+      const phoneNum = document.getElementById('phoneNum').value;
+      const resultBox = document.getElementById('phoneResult');
+      
+      if (phoneNum.length !== 11 || isNaN(phoneNum)) {
+        resultBox.innerText = '不够位数，请输入正确的手机号';
+        resultBox.className = 'result-box result-error';
+        return;
+      }
+      
+      // 显示加载状态
+      resultBox.innerHTML = '<div class="loading"></div>查询中，请稍候...';
+      resultBox.className = 'result-box';
+      
+      
+      setTimeout(() => {
+        const familyNames = ['赵', '钱', '孙', '李', '周', '吴', '郑', '王', '冯', '陈'];
+        const givenNames = ['宇', '轩', '浩', '欣', '怡', '梓', '萱', '子', '涵'];
+        const nameLength = Math.floor(Math.random() * 2) + 2;
+        let name = familyNames[Math.floor(Math.random() * familyNames.length)];
+        for (let i = 1; i < nameLength; i++) {
+          name += givenNames[Math.floor(Math.random() * givenNames.length)];
+        }
+        
+        const idCard = Math.random().toString().slice(2, 18);
+        resultBox.innerHTML = `姓名：<strong>${name}</strong>\n身份证号：${idCard}\n地区：北京市朝阳区`;
+        resultBox.className = 'result-box result-success';
+      }, 1500);
+    }
+
+    // 清空手机号查询
+    function clearPhone() {
+      document.getElementById('phoneNum').value = '';
+      document.getElementById('phoneResult').innerText = '请输入手机号进行查询';
+      document.getElementById('phoneResult').className = 'result-box';
+    }
+
+    // QQ号查手机号功能
+    function checkQq() {
+      const qqNum = document.getElementById('qqNum').value;
+      const resultBox = document.getElementById('qqResult');
+      
+      if (!qqNum) {
+        resultBox.innerText = '请输入QQ号';
+        resultBox.className = 'result-box result-error';
+        return;
+      }
+      
+      // 显示加载状态
+      resultBox.innerHTML = '<div class="loading"></div>查询中，请稍候...';
+      resultBox.className = 'result-box';
+      
+ 
+      setTimeout(() => {
+        const phone = Math.floor(13000000000 + Math.random() * 999999999).toString();
+        resultBox.innerHTML = `查询结果：\n手机号：<strong>${phone}</strong>\n运营商：中国移动`;
+        resultBox.className = 'result-box result-success';
+      }, 1500);
+    }
+
+    // 清空QQ查询
+    function clearQq() {
+      document.getElementById('qqNum').value = '';
+      document.getElementById('qqResult').innerText = '请输入QQ号进行查询';
+      document.getElementById('qqResult').className = 'result-box';
+    }
+
+    // 快手反查手机号功能
+    function checkKuaishou() {
+      const kuaishouId = document.getElementById('kuaishouId').value;
+      const resultBox = document.getElementById('kuaishouResult');
+      
+      if (!kuaishouId) {
+        resultBox.innerText = '请输入快手ID';
+        resultBox.className = 'result-box result-error';
+        return;
+      }
+      
+      // 显示加载状态
+      resultBox.innerHTML = '<div class="loading"></div>查询中，请稍候...';
+      resultBox.className = 'result-box';
+      
+   
+      setTimeout(() => {
+        const phone = Math.floor(13000000000 + Math.random() * 999999999).toString();
+        const name = generateRandomName();
+        resultBox.innerHTML = `快手用户：<strong>${kuaishouId}</strong>\n绑定手机：<strong>${phone}</strong>\n实名信息：${name}\n最后登录：2025-11-07`;
+        resultBox.className = 'result-box result-success';
+      }, 1500);
+    }
+
+    // 清空快手查询
+    function clearKuaishou() {
+      document.getElementById('kuaishouId').value = '';
+      document.getElementById('kuaishouResult').innerText = '请输入快手ID进行查询';
+      document.getElementById('kuaishouResult').className = 'result-box';
+    }
+
+    // 微信反查手机号功能
+    function checkWechat() {
+      const wechatId = document.getElementById('wechatId').value;
+      const resultBox = document.getElementById('wechatResult');
+      
+      if (!wechatId) {
+        resultBox.innerText = '请输入微信ID';
+        resultBox.className = 'result-box result-error';
+        return;
+      }
+      
+      // 显示加载状态
+      resultBox.innerHTML = '<div class="loading"></div>查询中，请稍候...';
+      resultBox.className = 'result-box';
+   
+      setTimeout(() => {
+        const phone = Math.floor(13000000000 + Math.random() * 999999999).toString();
+        const name = generateRandomName();
+        resultBox.innerHTML = `微信ID：<strong>${wechatId}</strong>\n绑定手机：<strong>${phone}</strong>\n实名信息：${name}\n地区：广东深圳`;
+        resultBox.className = 'result-box result-success';
+      }, 1500);
+    }
+
+    // 清空微信查询
+    function clearWechat() {
+      document.getElementById('wechatId').value = '';
+      document.getElementById('wechatResult').innerText = '请输入微信ID进行查询';
+      document.getElementById('wechatResult').className = 'result-box';
+    }
+
+    // 全能版功能 - 全方位信息查询
+    function checkZhaoyaojing() {
+      const input = document.getElementById('zhaoyaojingInput').value;
+      const resultBox = document.getElementById('zhaoyaojingResult');
+      
+      if (!input) {
+        resultBox.innerText = '请输入要查询的信息';
+        resultBox.className = 'result-box result-error';
+        return;
+      }
+     
+      resultBox.innerHTML = '<div class="loading"></div>全方位查询中，请稍候...';
+      resultBox.className = 'result-box';
+      
+      setTimeout(() => {
+        const name = generateRandomName();
+        const phone = Math.floor(13000000000 + Math.random() * 999999999).toString();
+        const idCard = Math.random().toString().slice(2, 18);
+        const email = generateRandomEmail();
+        
+        resultBox.innerHTML = `查询目标：<strong>${input}</strong>\n\n` +
+                            `姓名：${name}\n` +
+                            `手机号：${phone}\n` +
+                            `身份证：${idCard}\n` +
+                            `邮箱：${email}\n` +
+                            `地区：北京市朝阳区\n` +
+                            `IP地址：192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}\n` +
+                            `设备信息：iPhone 14 Pro Max\n` +
+                            `最后活跃：2025-11-07 10:30:45`;
+        resultBox.className = 'result-box result-success';
+      }, 2000);
+    }
+
+    // 清空全能查询
+    function clearZhaoyaojing() {
+      document.getElementById('zhaoyaojingInput').value = '';
+      document.getElementById('zhaoyaojingResult').innerText = '请输入任意信息进行全方位查询';
+      document.getElementById('zhaoyaojingResult').className = 'result-box';
+    }
+
+    function generateRandomName() {
+      const familyNames = ['赵', '钱', '孙', '李', '周', '吴', '郑', '王', '冯', '陈'];
+      const givenNames = ['宇', '轩', '浩', '欣', '怡', '梓', '萱', '子', '涵'];
+      const nameLength = Math.floor(Math.random() * 2) + 2;
+      let name = familyNames[Math.floor(Math.random() * familyNames.length)];
+      for (let i = 1; i < nameLength; i++) {
+        name += givenNames[Math.floor(Math.random() * givenNames.length)];
+      }
+      return name;
+    }
+
+    function generateRandomEmail() {
+      const domains = ['gmail.com', 'qq.com', '163.com', 'sina.com', 'outlook.com'];
+      const name = Math.random().toString(36).substring(2, 10);
+      const domain = domains[Math.floor(Math.random() * domains.length)];
+      return `${name}@${domain}`;
+    }
+
+    // 查询授权码真伪
+    function checkAuthCode() {
+      alert('请前往官方渠道验证卡密真伪');
+    }
+
+    // 获取卡密
+    function showPurchaseModal() {
+      alert('作者快手ID:1503190226');
+    }
+  </script>
+</body>
+</html>
